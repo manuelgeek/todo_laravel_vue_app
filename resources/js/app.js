@@ -1,10 +1,9 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
-require('./bootstrap');
 
 // window.Vue = require('vue').default;
 
@@ -27,9 +26,11 @@ require('./bootstrap');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-import {createApp} from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store"
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+
+require('./bootstrap');
 
 createApp(App).use(store).use(router).mount('#app');
