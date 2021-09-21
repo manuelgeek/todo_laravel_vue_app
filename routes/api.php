@@ -14,6 +14,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::fallback(function(){
+    return response()->json(['message' => 'Not Found!'], 404);
+});
+
+Route::group(['namespace' => 'API', 'prefix' => 'v1'], function () {
+    Route::group(['namespace' => 'Auth'], function () {
+        Route::post('/register', 'AuthController@register');
+        Route::post('/login', 'AuthController@login');
+        // passwords
+        Route::post('password/email', 'ResetPasswordController@forgot');
+        Route::post('password/reset', 'ResetPasswordController@reset');
+        Route::post('update/reset', 'ResetPasswordController@updatePassword');
+
+        Route::group(['middleware' => 'auth:sanctum'], function () {
+            Route::post('/profile', 'AuthController@profile');
+            Route::post('/logout', 'AuthController@logout');
+        });
+    });
 });
