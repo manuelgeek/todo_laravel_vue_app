@@ -37,5 +37,7 @@ Route::group(['namespace' => 'API', 'prefix' => 'v1'], function () {
         Route::apiResource('categories', 'CategoriesController')->parameters(['categories' => 'category:slug']);
         Route::apiResource('tasks', 'TasksController')->parameters(['tasks' => 'task:slug']);
         Route::get('user/{user}/tasks', 'TasksController@userTasks');
+        Route::post('/tasks/{task}/comments/store', 'TasksController@storeComment');
+        Route::delete('/tasks/{task}/comments/{comment}/store', 'TasksController@destroyComment');
     });
 });

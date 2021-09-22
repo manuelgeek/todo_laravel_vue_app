@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TaskRequest;
 use App\Models\Task;
+use App\Models\TaskComment;
 use App\Models\User;
 use App\Services\Helper;
 use App\Transformers\TaskTransformer;
@@ -58,7 +59,25 @@ class TasksController extends Controller
     {
         $task->delete();
 
-        return response()->json(['message' => 'Task deleted!'], 201);
+        return response()->json(['message' => 'Task deleted!']);
+    }
+
+    public function storeComment(Request $request, Task $task): \Illuminate\Http\JsonResponse
+    {
+        $request->validate([
+            'comment' => 'required|string|max:300',
+        ]);
+
+        $comment = $task->comments()->create($request->all());
+        return response()->json(['comment' => $comment]);
+    }
+
+    public function destroyComment(Task $task, $id): \Illuminate\Http\JsonResponse
+    {
+        $comment = $task->comments()->findOrFail($id);
+        $comment->delete();
+
+        return response()->json(['message' => 'Task comment deleted!']);
     }
 
     private function queryTasks($user_id)
