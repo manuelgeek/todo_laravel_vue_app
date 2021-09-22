@@ -23,7 +23,7 @@ class CategoriesController extends Controller
 
     public function store(CategoryRequest $request): \Illuminate\Http\JsonResponse
     {
-        $category = auth()->user()->category->create([
+        $category = auth()->user()->category()->create([
             'name' => $request->name,
             'slug' => Helper::getSlug($request->name)
         ]);
@@ -39,10 +39,10 @@ class CategoriesController extends Controller
         return response()->json(['category' => fractal($category, new CategoryTransformer())], 201);
     }
 
-    public function delete(Category $category): \Illuminate\Http\JsonResponse
+    public function destroy(Category $category): \Illuminate\Http\JsonResponse
     {
         $category->tasks()->delete();
         $category->delete();
-        return response()->json(['message' => 'Category delete!'], 201);
+        return response()->json(['message' => 'Category deleted!'], 201);
     }
 }

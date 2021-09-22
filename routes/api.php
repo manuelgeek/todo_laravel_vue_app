@@ -35,6 +35,7 @@ Route::group(['namespace' => 'API', 'prefix' => 'v1'], function () {
 
     Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::apiResource('categories', 'CategoriesController')->parameters(['categories' => 'category:slug']);
-        Route::apiResource('tasks', 'CategoriesController')->parameters(['tasks' => 'task:slug']);
+        Route::apiResource('tasks', 'TasksController')->parameters(['tasks' => 'task:slug']);
+        Route::get('user/{user}/tasks', 'TasksController@userTasks');
     });
 });

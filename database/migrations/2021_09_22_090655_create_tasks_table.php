@@ -21,7 +21,7 @@ class CreateTasksTable extends Migration
             $table->bigInteger('user_id');
             $table->bigInteger('category_id');
             $table->boolean('is_public');
-            $table->string('status');
+            $table->string('status')->default(\App\Models\Task::TODO);
             $table->softDeletes();
             $table->timestamps();
         });
