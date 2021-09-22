@@ -2,10 +2,10 @@
 
 namespace App\Transformers;
 
-use App\Models\User;
+use App\Models\Category;
 use League\Fractal\TransformerAbstract;
 
-class UserTransformer extends TransformerAbstract
+class CategoryTransformer extends TransformerAbstract
 {
     /**
      * List of resources to automatically include
@@ -30,12 +30,12 @@ class UserTransformer extends TransformerAbstract
      *
      * @return array
      */
-    public function transform(User $user): array
+    public function transform(Category $category)
     {
         return [
-            'name' => $user->name,
-            'email' => $user->email,
-            'created_at' => $user->created_at,
+            'name' => $category->name,
+            'slug' => $category->slug,
+            'created_at' => $category->created_at
         ];
     }
 }

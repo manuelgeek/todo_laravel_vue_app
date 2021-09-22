@@ -5,33 +5,13 @@ namespace App\Services;
 
 
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class Helper
 {
-
-    static function getTimestampFromDate($date, $format = 'd-m-Y H:i:s'): string
-    {
-        return Carbon::createFromFormat($format, $date)->toDateTimeString();
-    }
-
     static function getTimestampFromDateString($date): string
     {
         return Carbon::parse($date)->toDateTimeString();
-    }
-
-    static function getDateFromTimestamp($date, $format = 'd-m-Y H:i:s'): string
-    {
-        return Carbon::parse($date)->format($format);
-    }
-
-    static function defaultDateFormat($date): string
-    {
-        return Carbon::parse($date)->format('d-m-y');
-    }
-
-    static function datePickerFormat($date): string
-    {
-        return Carbon::parse($date)->format('d-m-Y H:i:s');
     }
 
     static function readableDate($date): string
@@ -44,8 +24,8 @@ class Helper
         return $date !== null ? Carbon::parse($date)->format('j M, Y h:i a') : '';
     }
 
-    static function getDifferenceInDays($date): int
+    static function getSlug($str): string
     {
-        return Carbon::parse(Carbon::now())->diffInDays($date);
+        return Str::slug($str).'-'.Str::random(3);
     }
 }

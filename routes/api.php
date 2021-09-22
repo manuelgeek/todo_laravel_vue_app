@@ -32,4 +32,9 @@ Route::group(['namespace' => 'API', 'prefix' => 'v1'], function () {
             Route::post('/logout', 'AuthController@logout');
         });
     });
+
+    Route::group(['middleware' => 'auth:sanctum'], function () {
+        Route::apiResource('categories', 'CategoriesController')->parameters(['categories' => 'category:slug']);
+        Route::apiResource('tasks', 'CategoriesController')->parameters(['tasks' => 'task:slug']);
+    });
 });

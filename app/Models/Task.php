@@ -14,7 +14,7 @@ class Task extends Model
     const DOING = 'doing';
     const DONE = 'done';
 
-    protected $fillable = ['title', 'description', 'is_public', 'status', 'category_id'];
+    protected $fillable = ['title', 'slug', 'description', 'is_public', 'status', 'category_id'];
 
     protected $with = ['category'];
 
