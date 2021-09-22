@@ -16,4 +16,4 @@ use Illuminate\Support\Facades\Route;
 //front end
 Route::get('/{vue_capture?}', function () {
     return view('vue');
-})->where('vue_capture', '[\/\w\.-]*');
+})->where('vue_capture', '^(?!api).*$');

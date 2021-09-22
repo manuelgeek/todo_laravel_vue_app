@@ -3,6 +3,7 @@
 namespace App\Transformers;
 
 use App\Models\User;
+use App\Services\Helper;
 use League\Fractal\TransformerAbstract;
 
 class UserTransformer extends TransformerAbstract
@@ -35,7 +36,7 @@ class UserTransformer extends TransformerAbstract
         return [
             'name' => $user->name,
             'email' => $user->email,
-            'created_at' => $user->created_at,
+            'created_at' => Helper::getTimestampFromDateString($user->created_at),
         ];
     }
 }

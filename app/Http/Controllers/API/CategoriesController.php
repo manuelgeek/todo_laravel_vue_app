@@ -23,7 +23,7 @@ class CategoriesController extends Controller
 
     public function store(CategoryRequest $request): \Illuminate\Http\JsonResponse
     {
-        $category = auth()->user()->category()->create([
+        $category = auth()->user()->categories()->create([
             'name' => $request->name,
             'slug' => Helper::getSlug($request->name)
         ]);
@@ -34,7 +34,8 @@ class CategoriesController extends Controller
     {
         $category->update([
             'name' => $request->name,
-            'slug' => Helper::getSlug($request->name)
+//        no updating slug
+//            'slug' => Helper::getSlug($request->name)
         ]);
         return response()->json(['category' => fractal($category, new CategoryTransformer())], 201);
     }

@@ -48,7 +48,6 @@ class AuthController extends Controller
         // for sanctum cookie auth
         if (Auth::attempt($credentials)) {
             $user = User::where('email', $request->email)->first();
-            $request->session()->regenerate();
 
             return response()->json([
 //                for Authorization header auth
@@ -76,10 +75,6 @@ class AuthController extends Controller
         // remove api tokens too
         $user = auth('sanctum')->user();
         $user->tokens->each->delete();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
 
         return response()->json([
             'message' => 'Logged out on all devices!'

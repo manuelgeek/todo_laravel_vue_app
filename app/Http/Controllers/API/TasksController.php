@@ -40,6 +40,7 @@ class TasksController extends Controller
     {
         $data = $request->all();
         $data['slug'] = Helper::getSlug($request->title);
+        $data['status'] = Task::TODO;
 
         $task = auth()->user()->tasks()->create($data);
 
@@ -49,7 +50,8 @@ class TasksController extends Controller
     public function update(TaskRequest $request, Task $task): \Illuminate\Http\JsonResponse
     {
         $data = $request->all();
-        $data['slug'] = Helper::getSlug($request->title);
+//        * we're not going to change the slug'
+//        $data['slug'] = Helper::getSlug($request->title);
 
         $task->update($data);
 
@@ -68,21 +70,27 @@ class TasksController extends Controller
 
     public function updateVisibility(Task $task): \Illuminate\Http\JsonResponse
     {
-        $task->update(['status' => !$task->status]);
+        $task->update(['is_public' => !$task->is_public]);
         return response()->json(['task' => fractal($task, new TaskTransformer())]);
     }
 
     public function destroy(Task $task): \Illuminate\Http\JsonResponse
     {
+        $task->comments()->delete();
         $task->delete();
 
         return response()->json(['message' => 'Task deleted!']);
     }
 
+    public function indexComment(Task $task): \Illuminate\Http\JsonResponse
+    {
+        return response()->json(['comment' => $task->comments]);
+    }
+
     public function storeComment(Request $request, Task $task): \Illuminate\Http\JsonResponse
     {
         $request->validate([
-            'comment' => 'required|string|max:300',
+            'body' => 'required|string|max:300',
         ]);
 
         $comment = $task->comments()->create($request->all());

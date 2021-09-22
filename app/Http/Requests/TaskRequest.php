@@ -22,13 +22,14 @@ class TaskRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:3000'],
+            'description' => ['sometimes', 'nullable', 'string', 'max:3000'],
+            'is_public' => ['required', 'boolean'],
             'category_id' => ['required', 'integer', function($attribute, $value, $fail) {
-                if(!Category::where('user_id', auth()->user())->whereId($value)->first()){
+                if(!Category::where('user_id', auth()->id())->whereId($value)->first()){
                     return $fail(__('No category found'));
                 }
             }]

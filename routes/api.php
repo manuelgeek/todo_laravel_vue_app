@@ -25,10 +25,10 @@ Route::group(['namespace' => 'API', 'prefix' => 'v1'], function () {
         // passwords
         Route::post('password/email', 'ResetPasswordController@forgot');
         Route::post('password/reset', 'ResetPasswordController@reset');
-        Route::post('update/reset', 'ResetPasswordController@updatePassword');
 
         Route::group(['middleware' => 'auth:sanctum'], function () {
-            Route::post('/profile', 'AuthController@profile');
+            Route::get('/profile', 'AuthController@profile');
+            Route::post('update/password', 'ResetPasswordController@updatePassword');
             Route::post('/logout', 'AuthController@logout');
         });
     });
@@ -37,9 +37,10 @@ Route::group(['namespace' => 'API', 'prefix' => 'v1'], function () {
         Route::apiResource('categories', 'CategoriesController')->parameters(['categories' => 'category:slug']);
         Route::apiResource('tasks', 'TasksController')->parameters(['tasks' => 'task:slug']);
         Route::get('user/{user}/tasks', 'TasksController@userTasks');
-        Route::post('/tasks/{task}/comments/store', 'TasksController@storeComment');
-        Route::put('/tasks/{task}/status/update', 'TasksController@updateStatus');
-        Route::get('/tasks/{task}/visibility/update', 'TasksController@updateVisibility');
-        Route::delete('/tasks/{task}/comments/{comment}/store', 'TasksController@destroyComment');
+        Route::get('/tasks/{task:slug}/comments', 'TasksController@indexComment');
+        Route::post('/tasks/{task:slug}/comments', 'TasksController@storeComment');
+        Route::put('/tasks/{task:slug}/status', 'TasksController@updateStatus');
+        Route::get('/tasks/{task:slug}/visibility', 'TasksController@updateVisibility');
+        Route::delete('/tasks/{task:slug}/comments/{comment}', 'TasksController@destroyComment');
     });
 });

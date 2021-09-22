@@ -3,6 +3,7 @@
 namespace App\Transformers;
 
 use App\Models\Category;
+use App\Services\Helper;
 use League\Fractal\TransformerAbstract;
 
 class CategoryTransformer extends TransformerAbstract
@@ -35,7 +36,7 @@ class CategoryTransformer extends TransformerAbstract
         return [
             'name' => $category->name,
             'slug' => $category->slug,
-            'created_at' => $category->created_at
+            'created_at' => Helper::getTimestampFromDateString($category->created_at)
         ];
     }
 }

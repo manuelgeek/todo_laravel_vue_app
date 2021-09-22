@@ -3,6 +3,7 @@
 namespace App\Transformers;
 
 use App\Models\Task;
+use App\Services\Helper;
 use League\Fractal\TransformerAbstract;
 
 class TaskTransformer extends TransformerAbstract
@@ -39,6 +40,7 @@ class TaskTransformer extends TransformerAbstract
             'category' => fractal($task->category, new CategoryTransformer()),
             'status' => $task->status,
             'visibility' => $task->is_public ? 'public' : 'private',
+            'created_at' => Helper::getTimestampFromDateString($task->created_at)
         ];
     }
 }
