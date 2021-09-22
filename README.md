@@ -34,7 +34,10 @@ Create database tables and run seeder. The seeder sets up a user account.
 `php artisan serve`
 
 ## APIs Postman Collection
-https://www.getpostman.com/collections/2701fdba5b74636c14e8
+https://www.getpostman.com/collections/8b7fb39d21cd94b2c310
+
+## API Documentation
+https://documenter.getpostman.com/view/3385291/UUxwBTm3
 
 ## License
 
