@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Services\Helper;
 use App\Transformers\TaskTransformer;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class TasksController extends Controller
 {
@@ -52,6 +53,22 @@ class TasksController extends Controller
 
         $task->update($data);
 
+        return response()->json(['task' => fractal($task, new TaskTransformer())]);
+    }
+
+    public function updateStatus(Request $request, Task $task): \Illuminate\Http\JsonResponse
+    {
+        $request->validate([
+            'status' => ['required', Rule::in([$task::TODO, $task::DOING, $task::DONE])],
+        ]);
+
+        $task->update(['status' => $request->status]);
+        return response()->json(['task' => fractal($task, new TaskTransformer())]);
+    }
+
+    public function updateVisibility(Task $task): \Illuminate\Http\JsonResponse
+    {
+        $task->update(['status' => !$task->status]);
         return response()->json(['task' => fractal($task, new TaskTransformer())]);
     }
 

@@ -38,6 +38,8 @@ Route::group(['namespace' => 'API', 'prefix' => 'v1'], function () {
         Route::apiResource('tasks', 'TasksController')->parameters(['tasks' => 'task:slug']);
         Route::get('user/{user}/tasks', 'TasksController@userTasks');
         Route::post('/tasks/{task}/comments/store', 'TasksController@storeComment');
+        Route::put('/tasks/{task}/status/update', 'TasksController@updateStatus');
+        Route::get('/tasks/{task}/visibility/update', 'TasksController@updateVisibility');
         Route::delete('/tasks/{task}/comments/{comment}/store', 'TasksController@destroyComment');
     });
 });
