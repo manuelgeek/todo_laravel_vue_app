@@ -11,12 +11,14 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="#">
-                        <input type="text" name="category"  id="category" placeholder="Add category">
+                    <form action="">
+                        <input type="text" name="comment" class="form-control mt-2 mt-sm-0" placeholder="Add Category ... click Enter to add">
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <ul class="list-unstyled">
+                        <li class="comment-item p-2 mt-2">Lorem ipsum dolor sit amet <i class="fa fa-trash text-danger mx-2 float-right" title="Delete category" style="cursor: pointer; font-size: 15px"></i> </li>
+                        <li class="comment-item p-2 mt-2">Lorem ipsum dolor sit amet <i class="fa fa-trash text-danger mx-2 float-right" title="Delete category" style="cursor: pointer; font-size: 15px"></i> </li>
+                        <li class="comment-item p-2 mt-2">No Categories yet</li>
+                    </ul>
                 </div>
             </div>
         </div>
