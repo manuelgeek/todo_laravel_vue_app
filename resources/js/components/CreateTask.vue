@@ -10,11 +10,11 @@
                 <option value="1">Cast</option>
             </select>
         </div>
-        <div class="col-md-2 px-1 mt-2">
+        <div class="col-md-2 px-1 px-md-4 mt-2">
             <label><input type="checkbox" class="form-check-inline" name="is_public" id="">Make Public</label>
         </div>
         <div class="col-md-2 px-1 mt-2 d-flex justify-content-end">
-            <button class="btn btn-primary btn-sm">Create</button>
+            <button class="btn btn-info btn-sm">Create</button>
         </div>
     </form>
 </template>
