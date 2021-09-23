@@ -41,7 +41,8 @@ https://documenter.getpostman.com/view/3385291/UUxwBTm3
 
 ## What I would have done given more time
 - Forgot and reset password UIs, the APIs are already created
-- 
+- Edit category
+- Edit Task
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

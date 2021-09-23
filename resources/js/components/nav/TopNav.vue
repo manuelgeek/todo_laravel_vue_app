@@ -12,7 +12,7 @@
                         <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Categories</a>
+                        <categories />
                     </li>
                    <category-filter />
                 </ul>
@@ -27,10 +27,13 @@
 import CategoryFilter from './CategoryFilter';
 import Search from './Search';
 import Avatar from './Avatar';
+import Categories from './Categories';
 
 export default {
   name: 'TopNav',
-  components: { Avatar, Search, CategoryFilter },
+  components: {
+    Categories, Avatar, Search, CategoryFilter,
+  },
   setup() {
     const appName = process.env.MIX_APP_NAME;
     return {

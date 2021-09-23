@@ -5,13 +5,21 @@
         <li role="presentation" class="nav-item completed-task"><a href="#" class="nav-link text-success font-weight-bold">Done</a></li>
     </ul>
     <div class="todo-list">
-        <div class="todo-item todo-item-info">
-            <span>Create theme</span>
-            <a href="#" class="float-right remove-todo-item"><i class="fa fa-user"></i></a>
+        <div class="todo-item todo-item-info align-items-center">
+            <span>Create theme dsddsdscfwerfrwfvsdfbgdfvsasfdgfhndfs</span>
+            <span class="float-right d-flex align-items-center remove-todo-item">
+                <span><i class="fa fa-eye text-primary mx-2" title="Public/Private" style="cursor: pointer; font-size: 15px"></i></span>
+                <i class="fa fa-trash text-danger mx-2" title="Delete Task" style="cursor: pointer; font-size: 15px"></i>
+                <select class="form-control form-control-sm">
+                    <option value="done">Done</option>
+                    <option value="doing">Doing</option>
+                    <option value="todo">To Do</option>
+                </select>
+            </span>
         </div>
         <div class="todo-item todo-item-warning">
             <span>Work on wordpress</span>
-            <a href="#" class="float-right remove-todo-item"><i class="icon-close"></i></a>
+            <span class="float-right remove-todo-item"><i class="icon-close text-warning"></i></span>
         </div>
 
         <div class="todo-item todo-item-success">
