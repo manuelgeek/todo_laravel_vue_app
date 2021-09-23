@@ -1,4 +1,6 @@
-import axios from "./../../bootstrap";
+/* eslint-disable no-shadow,no-param-reassign */
+import axios from '../../bootstrap';
+
 const state = () => ({
   user: {},
   authenticated: false,
@@ -31,6 +33,10 @@ const actions = {
       commit('SET_AUTHENTICATED', false);
       commit('SET_USER', {});
     });
+  },
+  signOut({ commit }) {
+    commit('SET_AUTHENTICATED', false);
+    commit('SET_USER', {});
   },
 };
 

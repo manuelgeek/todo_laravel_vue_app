@@ -70,11 +70,11 @@ class AuthController extends Controller
 
     public function logout(Request $request): \Illuminate\Http\JsonResponse
     {
-        Auth::logout();
-
         // remove api tokens too
         $user = auth('sanctum')->user();
         $user->tokens->each->delete();
+
+        Auth::guard('web')->logout();
 
         return response()->json([
             'message' => 'Logged out on all devices!'

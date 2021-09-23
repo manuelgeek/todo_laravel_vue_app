@@ -1,4 +1,4 @@
-/* eslint-disable global-require,no-empty,no-multi-assign */
+/* eslint-disable global-require,no-empty,no-multi-assign,no-undef */
 window._ = require('lodash');
 
 /**
