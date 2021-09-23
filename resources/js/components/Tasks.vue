@@ -45,7 +45,3 @@ export default {
   components: { TaskComments },
 };
 </script>
-
-<style scoped>
-
-</style>
