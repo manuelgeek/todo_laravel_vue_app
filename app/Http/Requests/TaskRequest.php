@@ -28,8 +28,8 @@ class TaskRequest extends FormRequest
             'title' => ['required', 'string', 'max:255'],
             'description' => ['sometimes', 'nullable', 'string', 'max:3000'],
             'is_public' => ['required', 'boolean'],
-            'category_id' => ['required', 'integer', function($attribute, $value, $fail) {
-                if(!Category::where('user_id', auth()->id())->whereId($value)->first()){
+            'category_id' => ['required', 'nullable', 'integer', function($attribute, $value, $fail) {
+                if($value !== 0 && !Category::where('user_id', auth()->id())->whereId($value)->first()){
                     return $fail(__('No category found'));
                 }
             }]

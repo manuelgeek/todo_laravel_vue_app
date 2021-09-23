@@ -20,7 +20,7 @@ class Task extends Model
 
     public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class)->withDefault(['name' => 'Default']);
     }
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
