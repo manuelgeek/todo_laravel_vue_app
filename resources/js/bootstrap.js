@@ -24,6 +24,7 @@ window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.axios.defaults.withCredentials = true;
+window.axios.defaults.baseURL = `${process.env.MIX_BASE_URL}/api/v1`;
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -41,3 +42,4 @@ window.axios.defaults.withCredentials = true;
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+export default axios;

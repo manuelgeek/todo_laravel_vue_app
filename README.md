@@ -43,6 +43,7 @@ https://documenter.getpostman.com/view/3385291/UUxwBTm3
 - Forgot and reset password UIs, the APIs are already created
 - Edit category
 - Edit Task
+- Handle task pagination - maybe use infinite scroll
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
