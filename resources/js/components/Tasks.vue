@@ -1,9 +1,9 @@
 <template>
     <ul class="nav nav-pills todo-nav">
-        <li role="presentation" class="nav-item all-task"><a href="#" class="nav-link text-black-50 font-weight-bold">All</a></li>
-        <li role="presentation" class="nav-item all-task"><a href="#" class="nav-link text-info font-weight-bold">To Do</a></li>
-        <li role="presentation" class="nav-item active-task"><a href="#" class="nav-link font-weight-bold text-warning">In Progress</a></li>
-        <li role="presentation" class="nav-item completed-task"><a href="#" class="nav-link text-success font-weight-bold">Done</a></li>
+        <li role="presentation" class="nav-item all-task"><a href="#" @click.prevent="$store.dispatch('tasks/getTasks')" class="nav-link text-black-50 font-weight-bold">All</a></li>
+        <li role="presentation" class="nav-item all-task"><a href="#" @click.prevent="filterWithStatus('todo')" class="nav-link text-info font-weight-bold">To Do</a></li>
+        <li role="presentation" class="nav-item active-task"><a href="#" @click.prevent="filterWithStatus('doing')" class="nav-link font-weight-bold text-warning">In Progress</a></li>
+        <li role="presentation" class="nav-item completed-task"><a href="#" @click.prevent="filterWithStatus('done')" class="nav-link text-success font-weight-bold">Done</a></li>
     </ul>
     <div v-if="!loading" class="todo-list">
         <template v-if="tasks.length > 0">
@@ -60,7 +60,7 @@ export default {
     });
 
     const {
-      changeStatus, changeVisibility, deleteCategory, loadMore, pagination, loadingMore,
+      changeStatus, changeVisibility, deleteCategory, loadMore, pagination, loadingMore, filterWithStatus,
     } = taskOps();
 
     const statusClass = (status) => {
@@ -85,6 +85,7 @@ export default {
       loadMore,
       loadingMore,
       pagination,
+      filterWithStatus,
     };
   },
 };

@@ -57,10 +57,10 @@ export default function tasks() {
     }
   };
 
-  // //filtering is done in backend
-  // const filterTasks = () => {
-  //
-  // }
+  // ? filtering is done in backend due to paginated data
+  const filterWithStatus = async (status) => {
+    await store.dispatch('tasks/getTasks', `/tasks?status=${status}`);
+  };
 
   return {
     form,
@@ -73,5 +73,6 @@ export default function tasks() {
     loadMore,
     pagination,
     loadingMore,
+    filterWithStatus,
   };
 }
