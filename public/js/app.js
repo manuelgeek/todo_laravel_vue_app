@@ -19489,8 +19489,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
-/* harmony import */ var _TaskComments__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TaskComments */ "./resources/js/components/TaskComments.vue");
-/* harmony import */ var _composables_tasks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../composables/tasks */ "./resources/js/composables/tasks.js");
+/* harmony import */ var _composables_tasks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../composables/tasks */ "./resources/js/composables/tasks.js");
+/* harmony import */ var _TaskComments__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TaskComments */ "./resources/js/components/TaskComments.vue");
 
 
 
@@ -19498,18 +19498,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Tasks',
   components: {
-    TaskComments: _TaskComments__WEBPACK_IMPORTED_MODULE_1__["default"]
+    TaskComments: _TaskComments__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   setup: function setup() {
     var store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.useStore)();
+    var loading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
-      store.dispatch('tasks/getTasks');
+      store.dispatch('tasks/getTasks').then(function () {
+        loading.value = false;
+      });
     });
 
-    var _taskOps = (0,_composables_tasks__WEBPACK_IMPORTED_MODULE_2__["default"])(),
+    var _taskOps = (0,_composables_tasks__WEBPACK_IMPORTED_MODULE_1__["default"])(),
         changeStatus = _taskOps.changeStatus,
         changeVisibility = _taskOps.changeVisibility,
-        deleteCategory = _taskOps.deleteCategory;
+        deleteCategory = _taskOps.deleteCategory,
+        loadMore = _taskOps.loadMore,
+        pagination = _taskOps.pagination,
+        loadingMore = _taskOps.loadingMore;
 
     var statusClass = function statusClass(status) {
       if (status === 'done') {
@@ -19531,7 +19537,11 @@ __webpack_require__.r(__webpack_exports__);
       statusClass: statusClass,
       changeStatus: changeStatus,
       changeVisibility: changeVisibility,
-      deleteCategory: deleteCategory
+      deleteCategory: deleteCategory,
+      loading: loading,
+      loadMore: loadMore,
+      loadingMore: loadingMore,
+      pagination: pagination
     };
   }
 });
@@ -20032,6 +20042,7 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 );
 
 var _hoisted_2 = {
+  key: 0,
   "class": "todo-list"
 };
 
@@ -20075,10 +20086,30 @@ var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_14 = [_hoisted_13];
+var _hoisted_15 = {
+  key: 1,
+  "class": "todo-list"
+};
+
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Loading ....", -1
+/* HOISTED */
+);
+
+var _hoisted_17 = [_hoisted_16];
+var _hoisted_18 = {
+  key: 2,
+  "class": "text-info font-weight-bold py-3 text-center"
+};
+
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Load more...", -1
+/* HOISTED */
+);
+
+var _hoisted_20 = [_hoisted_19];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_task_comments = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("task-comments");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$setup.tasks.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, !$setup.loading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [$setup.tasks.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 0
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.tasks, function (t, i) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
@@ -20135,7 +20166,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     );
   }), 128
   /* KEYED_FRAGMENT */
-  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, _hoisted_14))])], 64
+  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_12, _hoisted_14))])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_15, _hoisted_17)), $setup.pagination.next_page !== null && !$setup.loadingMore ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    href: "#",
+    onClick: _cache[0] || (_cache[0] = function () {
+      return $setup.loadMore && $setup.loadMore.apply($setup, arguments);
+    })
+  }, _hoisted_20)])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -20881,6 +20917,7 @@ function tasks() {
   });
   var validateErrors = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)([]);
   var loading = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(false);
+  var loadingMore = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(false);
   var store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.useStore)();
 
   var createTask = function createTask() {
@@ -20970,6 +21007,52 @@ function tasks() {
     };
   }();
 
+  var pagination = (0,vue__WEBPACK_IMPORTED_MODULE_1__.computed)(function () {
+    return store.getters['tasks/pagination'];
+  });
+
+  var loadMore = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              loadingMore.value = true;
+
+              if (!(pagination.value.next_page !== null)) {
+                _context4.next = 6;
+                break;
+              }
+
+              _context4.next = 4;
+              return store.dispatch('tasks/loadMoreTasks', pagination.value.next_page_url).then(function () {
+                loadingMore.value = false;
+              });
+
+            case 4:
+              _context4.next = 7;
+              break;
+
+            case 6:
+              loadingMore.value = false;
+
+            case 7:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }));
+
+    return function loadMore() {
+      return _ref4.apply(this, arguments);
+    };
+  }(); // //filtering is done in backend
+  // const filterTasks = () => {
+  //
+  // }
+
+
   return {
     form: form,
     loading: loading,
@@ -20977,7 +21060,10 @@ function tasks() {
     createTask: createTask,
     changeStatus: changeStatus,
     changeVisibility: changeVisibility,
-    deleteCategory: deleteCategory
+    deleteCategory: deleteCategory,
+    loadMore: loadMore,
+    pagination: pagination,
+    loadingMore: loadingMore
   };
 }
 
@@ -21363,18 +21449,27 @@ __webpack_require__.r(__webpack_exports__);
 
 var state = function state() {
   return {
-    tasks: []
+    tasks: [],
+    pagination: {}
   };
 };
 
 var getters = {
   tasks: function tasks(state) {
     return state.tasks;
+  },
+  pagination: function pagination(state) {
+    return state.pagination;
   }
 };
 var mutations = {
-  SET_TASKS: function SET_TASKS(state, value) {
-    state.tasks = value;
+  SET_TASKS: function SET_TASKS(state, data) {
+    state.tasks = data.tasks;
+    state.pagination = data.pagination;
+  },
+  UPDATE_TASKS: function UPDATE_TASKS(state, data) {
+    state.tasks = state.tasks.concat(data.tasks);
+    state.pagination = data.pagination;
   },
   ADD_TASK: function ADD_TASK(state, value) {
     state.tasks.unshift(value);
@@ -21400,28 +21495,35 @@ var mutations = {
 var actions = {
   getTasks: function getTasks(_ref) {
     var commit = _ref.commit;
-    return _plugins_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/tasks').then(function (response) {
-      commit('SET_TASKS', response.data.tasks);
+    var url = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '/tasks';
+    return _plugins_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(url).then(function (response) {
+      commit('SET_TASKS', response.data);
     });
   },
-  updateStatus: function updateStatus(_ref2, _ref3) {
+  loadMoreTasks: function loadMoreTasks(_ref2, url) {
     var commit = _ref2.commit;
-    var slug = _ref3.slug,
-        status = _ref3.status;
+    return _plugins_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(url).then(function (response) {
+      commit('UPDATE_TASKS', response.data);
+    });
+  },
+  updateStatus: function updateStatus(_ref3, _ref4) {
+    var commit = _ref3.commit;
+    var slug = _ref4.slug,
+        status = _ref4.status;
     return _plugins_axios__WEBPACK_IMPORTED_MODULE_0__["default"].put("/tasks/".concat(slug, "/status"), {
       status: status
     }).then(function (response) {
       commit('UPDATE_TASK_STATUS', response.data.task);
     });
   },
-  updateVisibility: function updateVisibility(_ref4, slug) {
-    var commit = _ref4.commit;
+  updateVisibility: function updateVisibility(_ref5, slug) {
+    var commit = _ref5.commit;
     return _plugins_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get("/tasks/".concat(slug, "/visibility")).then(function (response) {
       commit('UPDATE_TASK_VISIBILITY', response.data.task);
     });
   },
-  deleteTask: function deleteTask(_ref5, slug) {
-    var commit = _ref5.commit;
+  deleteTask: function deleteTask(_ref6, slug) {
+    var commit = _ref6.commit;
     return _plugins_axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/tasks/".concat(slug)).then(function () {
       commit('REMOVE_TASK', slug);
     });

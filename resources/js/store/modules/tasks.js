@@ -3,15 +3,22 @@ import axios from '../../plugins/axios';
 
 const state = () => ({
   tasks: [],
+  pagination: {},
 });
 
 const getters = {
   tasks: (state) => state.tasks,
+  pagination: (state) => state.pagination,
 };
 
 const mutations = {
-  SET_TASKS(state, value) {
-    state.tasks = value;
+  SET_TASKS(state, data) {
+    state.tasks = data.tasks;
+    state.pagination = data.pagination;
+  },
+  UPDATE_TASKS(state, data) {
+    state.tasks = state.tasks.concat(data.tasks);
+    state.pagination = data.pagination;
   },
   ADD_TASK(state, value) {
     state.tasks.unshift(value);
@@ -30,9 +37,14 @@ const mutations = {
 };
 
 const actions = {
-  getTasks({ commit }) {
-    return axios.get('/tasks').then((response) => {
-      commit('SET_TASKS', response.data.tasks);
+  getTasks({ commit }, url = '/tasks') {
+    return axios.get(url).then((response) => {
+      commit('SET_TASKS', response.data);
+    });
+  },
+  loadMoreTasks({ commit }, url) {
+    return axios.get(url).then((response) => {
+      commit('UPDATE_TASKS', response.data);
     });
   },
   updateStatus({ commit }, { slug, status }) {

@@ -1,4 +1,4 @@
-import { reactive, ref } from 'vue';
+import { computed, reactive, ref } from 'vue';
 import { useStore } from 'vuex';
 import axios from '../plugins/axios';
 
@@ -11,6 +11,7 @@ export default function tasks() {
 
   const validateErrors = ref([]);
   const loading = ref(false);
+  const loadingMore = ref(false);
   const store = useStore();
 
   const createTask = () => {
@@ -43,6 +44,24 @@ export default function tasks() {
     await store.dispatch('tasks/deleteTask', slug);
   };
 
+  const pagination = computed(() => store.getters['tasks/pagination']);
+
+  const loadMore = async () => {
+    loadingMore.value = true;
+    if (pagination.value.next_page !== null) {
+      await store.dispatch('tasks/loadMoreTasks', pagination.value.next_page_url).then(() => {
+        loadingMore.value = false;
+      });
+    } else {
+      loadingMore.value = false;
+    }
+  };
+
+  // //filtering is done in backend
+  // const filterTasks = () => {
+  //
+  // }
+
   return {
     form,
     loading,
@@ -51,5 +70,8 @@ export default function tasks() {
     changeStatus,
     changeVisibility,
     deleteCategory,
+    loadMore,
+    pagination,
+    loadingMore,
   };
 }

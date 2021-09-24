@@ -18,8 +18,11 @@ class TasksController extends Controller
     {
         $query = $this->queryTasks(auth()->id());
 
-        $tasks = $query->orderByDesc('created_at')->get();
-        return response()->json(['tasks' => fractal($tasks, new TaskTransformer())]);
+        $tasks = $query->orderByDesc('created_at')->paginate(8);
+        return response()->json([
+            'tasks' => fractal($tasks->getCollection(), new TaskTransformer()),
+            'pagination' => get_paginator_meta_data($tasks)
+        ]);
     }
 
     public function userTasks(User $user): \Illuminate\Http\JsonResponse
@@ -27,8 +30,11 @@ class TasksController extends Controller
         $query = $this->queryTasks($user->id);
         $query = $query->where('is_public', true);
 
-        $tasks = $query->orderByDesc('created_at')->get();
-        return response()->json(['tasks' => fractal($tasks, new TaskTransformer())]);
+        $tasks = $query->orderByDesc('created_at')->paginate(10);
+        return response()->json([
+            'tasks' => fractal($tasks->getCollection(), new TaskTransformer()),
+            'pagination' => get_paginator_meta_data($tasks)
+        ]);
     }
 
     public function show(Task $task): \Illuminate\Http\JsonResponse

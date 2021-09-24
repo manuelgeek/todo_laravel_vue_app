@@ -5,7 +5,7 @@
         <li role="presentation" class="nav-item active-task"><a href="#" class="nav-link font-weight-bold text-warning">In Progress</a></li>
         <li role="presentation" class="nav-item completed-task"><a href="#" class="nav-link text-success font-weight-bold">Done</a></li>
     </ul>
-    <div class="todo-list">
+    <div v-if="!loading" class="todo-list">
         <template v-if="tasks.length > 0">
             <div v-for="(t, i) in tasks" :key="i" :class="['todo-item align-items-center', statusClass(t.status) ]">
                 <div>
@@ -30,24 +30,38 @@
             <p>No Tasks Yet !!!</p>
         </div>
     </div>
+    <div v-else class="todo-list">
+        <h5>Loading ....</h5>
+    </div>
+    <div v-if="pagination.next_page !== null && !loadingMore" class="text-info font-weight-bold py-3 text-center">
+        <a href="#" @click="loadMore"><h5>Load more...</h5></a>
+    </div>
 </template>
 
 <script>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
-import TaskComments from './TaskComments';
+
 import taskOps from '../composables/tasks';
+import TaskComments from './TaskComments';
 
 export default {
   name: 'Tasks',
-  components: { TaskComments },
+  components: {
+    TaskComments,
+  },
   setup() {
     const store = useStore();
+    const loading = ref(true);
     onMounted(() => {
-      store.dispatch('tasks/getTasks');
+      store.dispatch('tasks/getTasks').then(() => {
+        loading.value = false;
+      });
     });
 
-    const { changeStatus, changeVisibility, deleteCategory } = taskOps();
+    const {
+      changeStatus, changeVisibility, deleteCategory, loadMore, pagination, loadingMore,
+    } = taskOps();
 
     const statusClass = (status) => {
       if (status === 'done') {
@@ -67,6 +81,10 @@ export default {
       changeStatus,
       changeVisibility,
       deleteCategory,
+      loading,
+      loadMore,
+      loadingMore,
+      pagination,
     };
   },
 };
