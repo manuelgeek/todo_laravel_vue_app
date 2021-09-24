@@ -13,7 +13,7 @@ class CategoriesController extends Controller
 {
     public function index(): \Illuminate\Http\JsonResponse
     {
-        return response()->json(['categories' => fractal(Category::all(), new CategoryTransformer())], 200);
+        return response()->json(['categories' => fractal(Category::orderByDesc('created_at')->get(), new CategoryTransformer())], 200);
     }
 
     public function show(Category $category): \Illuminate\Http\JsonResponse

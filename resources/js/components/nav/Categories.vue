@@ -11,13 +11,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="">
-                        <input type="text" name="comment" class="form-control mt-2 mt-sm-0" placeholder="Add Category ... click Enter to add">
-                    </form>
+                    <create-category />
                     <ul class="list-unstyled">
-                        <li class="comment-item p-2 mt-2">Lorem ipsum dolor sit amet <i class="fa fa-trash text-danger mx-2 float-right" title="Delete category" style="cursor: pointer; font-size: 15px"></i> </li>
-                        <li class="comment-item p-2 mt-2">Lorem ipsum dolor sit amet <i class="fa fa-trash text-danger mx-2 float-right" title="Delete category" style="cursor: pointer; font-size: 15px"></i> </li>
-                        <li class="comment-item p-2 mt-2">No Categories yet</li>
+                        <template v-if="categories.length > 0">
+                            <li v-for="(c, i) of categories" :key="i" class="comment-item p-2 mt-2">{{
+                                    c.name }} <i class="fa fa-trash text-danger mx-2 float-right" title="Delete category" style="cursor: pointer; font-size: 15px"></i> </li>
+                        </template>
+                        <li v-else class="comment-item p-2 mt-2">No Categories yet</li>
                     </ul>
                 </div>
             </div>
@@ -26,7 +26,25 @@
 </template>
 
 <script>
+import { computed, onMounted } from 'vue';
+import { useStore } from 'vuex';
+import CreateCategory from '../category/CreateCategory';
+
 export default {
   name: 'Categories',
+  components: { CreateCategory },
+  setup() {
+    const store = useStore();
+
+    onMounted(() => {
+      store.dispatch('category/getCategories');
+    });
+
+    const categories = computed(() => store.getters['category/categories']);
+
+    return {
+      categories,
+    };
+  },
 };
 </script>
