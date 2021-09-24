@@ -20,6 +20,10 @@ const mutations = {
     const index = state.tasks.findIndex((t) => t.slug === task.slug);
     state.tasks[index].status = task.status;
   },
+  UPDATE_TASK_VISIBILITY(state, task) {
+    const index = state.tasks.findIndex((t) => t.slug === task.slug);
+    state.tasks[index].visibility = task.visibility;
+  },
   REMOVE_TASK(state, slug) {
     state.tasks = state.tasks.filter((i) => i.slug !== slug);
   },
@@ -34,6 +38,11 @@ const actions = {
   updateStatus({ commit }, { slug, status }) {
     return axios.put(`/tasks/${slug}/status`, { status }).then((response) => {
       commit('UPDATE_TASK_STATUS', response.data.task);
+    });
+  },
+  updateVisibilty({ commit }, slug) {
+    return axios.get(`/tasks/${slug}/visibility`).then((response) => {
+      commit('UPDATE_TASK_VISIBILITY', response.data.task);
     });
   },
   deleteTask({ commit }, slug) {

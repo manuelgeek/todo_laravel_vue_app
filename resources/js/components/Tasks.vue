@@ -10,10 +10,12 @@
             <div v-for="(t, i) in tasks" :key="i" :class="['todo-item align-items-center', statusClass(t.status) ]">
                 <div>
                     <span>{{ t.title }}</span><br>
-                    <small>{{ t.category.name }}</small>
+                    <small><strong>{{ t.category.name }}</strong></small>
                     <div class="float-right d-flex align-items-center remove-todo-item">
-                        <span><i :class="['fa text-primary mx-2', t.visibility === 'public' ? 'fa-eye' : 'fa-eye-slash']" title="Public/Private" style="cursor: pointer; font-size: 15px"></i></span>
-                        <i class="fa fa-trash text-danger mx-2" title="Delete Task" style="cursor: pointer; font-size: 15px"></i>
+                        <span @click="changeVisibility(t.slug)">
+                            <em :class="['fa text-primary mx-2', t.visibility === 'public' ? 'fa-eye' : 'fa-eye-slash']" title="Public/Private" style="cursor: pointer; font-size: 15px"></em>
+                        </span>
+                        <em @click="deleteCategory(t.slug)" class="fa fa-trash text-danger mx-2" title="Delete Task" style="cursor: pointer; font-size: 15px"></em>
                         <select v-model="t.status" class="form-control form-control-sm" @change="changeStatus(t.slug, t.status)">
                             <option value="done">Done</option>
                             <option value="doing">Doing</option>
@@ -45,7 +47,7 @@ export default {
       store.dispatch('tasks/getTasks');
     });
 
-    const { changeStatus } = taskOps();
+    const { changeStatus, changeVisibility, deleteCategory } = taskOps();
 
     const statusClass = (status) => {
       if (status === 'done') {
@@ -63,6 +65,8 @@ export default {
       tasks,
       statusClass,
       changeStatus,
+      changeVisibility,
+      deleteCategory,
     };
   },
 };

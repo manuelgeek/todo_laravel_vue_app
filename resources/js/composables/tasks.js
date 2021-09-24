@@ -31,8 +31,16 @@ export default function tasks() {
       });
   };
 
-  const changeStatus = (slug, status) => {
-    store.dispatch('tasks/updateStatus', { slug, status });
+  const changeStatus = async (slug, status) => {
+    await store.dispatch('tasks/updateStatus', { slug, status });
+  };
+
+  const changeVisibility = async (slug) => {
+    await store.dispatch('tasks/updateVisibilty', slug);
+  };
+
+  const deleteCategory = async (slug) => {
+    await store.dispatch('tasks/deleteTask', slug);
   };
 
   return {
@@ -40,6 +48,8 @@ export default function tasks() {
     loading,
     validateErrors,
     createTask,
-      changeStatus
+    changeStatus,
+    changeVisibility,
+    deleteCategory,
   };
 }
