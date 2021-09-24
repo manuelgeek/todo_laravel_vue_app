@@ -26,13 +26,14 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "axios": "^0.21",
+        "bootstrap": "^4.6.0",
+        "jquery": "^3.6",
+        "lodash": "^4.17.19",
+        "nprogress": "^0.2.0",
+        "popper.js": "^1.16.1",
         "vue": "^3.2.12",
         "vue-router": "^4.0.11",
-        "vuex": "^4.0.2",
-        "axios": "^0.21",
-        "popper.js": "^1.16.1",
-        "jquery": "^3.6",
-        "bootstrap": "^4.6.0",
-        "lodash": "^4.17.19"
+        "vuex": "^4.0.2"
     }
 }

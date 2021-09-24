@@ -20,11 +20,12 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = require('axios');
-
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.withCredentials = true;
-window.axios.defaults.baseURL = `${process.env.MIX_BASE_URL}/api/v1`;
+// ? Moved this to /plugins/axios
+// window.axios = require('axios');
+//
+// window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// window.axios.defaults.withCredentials = true;
+// window.axios.defaults.baseURL = `${process.env.MIX_BASE_URL}/api/v1`;
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -42,4 +43,3 @@ window.axios.defaults.baseURL = `${process.env.MIX_BASE_URL}/api/v1`;
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
-export default axios;

@@ -1,5 +1,5 @@
 /* eslint-disable no-shadow,no-param-reassign */
-import axios from '../../bootstrap';
+import axios from '../../plugins/axios';
 
 const state = () => ({
   user: {},

@@ -48,11 +48,11 @@
 </template>
 
 <script>
-/* eslint-disable no-undef */
 import { reactive, ref } from 'vue';
 import { useStore } from 'vuex';
 import Guest from '../../layouts/Guest';
 import router from '../../router';
+import axios from '../../plugins/axios';
 
 export default {
   name: 'Register',
@@ -72,7 +72,7 @@ export default {
       loading.value = true;
       validateErrors.value = [];
       const api2 = axios.create();
-      await api2.get(`${process.env.MIX_BASE_URL}/sanctum/csrf-cookie`).then((r) => {
+      await api2.get('/sanctum/csrf-cookie').then(() => {
         axios.post('/register', form)
           .then((response) => {
             store.dispatch('auth/signIn', response.data.user).then(() => {
