@@ -84,7 +84,7 @@ class TasksController extends Controller
 
     public function indexComment(Task $task): \Illuminate\Http\JsonResponse
     {
-        return response()->json(['comments' => $task->comments]);
+        return response()->json(['comments' => $task->comments()->orderByDesc('created_at')->get()]);
     }
 
     public function storeComment(Request $request, Task $task): \Illuminate\Http\JsonResponse

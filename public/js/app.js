@@ -19450,7 +19450,8 @@ __webpack_require__.r(__webpack_exports__);
         loading = _taskComments.loading,
         form = _taskComments.form,
         validateErrors = _taskComments.validateErrors,
-        createComment = _taskComments.createComment;
+        createComment = _taskComments.createComment,
+        deleteComment = _taskComments.deleteComment;
 
     var showComments = function showComments() {
       if (!('comments' in props.task)) {
@@ -19467,7 +19468,8 @@ __webpack_require__.r(__webpack_exports__);
       loading: loading,
       form: form,
       validateErrors: validateErrors,
-      createComment: createComment
+      createComment: createComment,
+      deleteComment: deleteComment
     };
   }
 });
@@ -19912,18 +19914,7 @@ var _hoisted_4 = {
 var _hoisted_5 = {
   "class": "list-unstyled"
 };
-
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("em", {
-  "class": "fa fa-trash text-danger mx-2 float-right",
-  title: "Delete comment",
-  style: {
-    "cursor": "pointer",
-    "font-size": "15px"
-  }
-}, null, -1
-/* HOISTED */
-);
-
+var _hoisted_6 = ["onClick"];
 var _hoisted_7 = {
   key: 1,
   "class": "comment-item p-2 mt-2"
@@ -19963,7 +19954,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "comment-item p-2 mt-2"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(c.body) + " ", 1
     /* TEXT */
-    ), _hoisted_6]);
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("em", {
+      onClick: function onClick($event) {
+        return $setup.deleteComment(c.id);
+      },
+      "class": "fa fa-trash text-danger mx-2 float-right",
+      title: "Delete comment",
+      style: {
+        "cursor": "pointer",
+        "font-size": "15px"
+      }
+    }, null, 8
+    /* PROPS */
+    , _hoisted_6)]);
   }), 128
   /* KEYED_FRAGMENT */
   )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_7, "No comments yet"))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]);
@@ -20784,10 +20787,37 @@ function taskComments(task) {
     };
   }();
 
+  var deleteComment = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(id) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return _plugins_axios__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("/tasks/".concat(slug, "/comments/").concat(id), form).then(function () {
+                comments.value = comments.value.filter(function (i) {
+                  return i.id !== id;
+                });
+              });
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function deleteComment(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
   return {
     comments: comments,
     getComments: getComments,
     createComment: createComment,
+    deleteComment: deleteComment,
     loading: loading,
     form: form,
     validateErrors: validateErrors

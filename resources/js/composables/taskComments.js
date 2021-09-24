@@ -35,10 +35,18 @@ export default function taskComments(task) {
       });
   };
 
+  const deleteComment = async (id) => {
+    await axios.delete(`/tasks/${slug}/comments/${id}`, form)
+      .then(() => {
+        comments.value = comments.value.filter((i) => i.id !== id);
+      });
+  };
+
   return {
     comments,
     getComments,
     createComment,
+    deleteComment,
     loading,
     form,
     validateErrors,
