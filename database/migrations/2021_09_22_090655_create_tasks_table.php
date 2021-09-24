@@ -17,7 +17,7 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->bigInteger('user_id');
             $table->bigInteger('category_id');
             $table->boolean('is_public');

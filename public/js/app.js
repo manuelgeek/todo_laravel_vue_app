@@ -19391,8 +19391,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var _composables_tasks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../composables/tasks */ "./resources/js/composables/tasks.js");
+
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'CreateTask'
+  name: 'CreateTask',
+  setup: function setup() {
+    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.useStore)();
+
+    var _tasks = (0,_composables_tasks__WEBPACK_IMPORTED_MODULE_1__["default"])(),
+        loading = _tasks.loading,
+        validateErrors = _tasks.validateErrors,
+        form = _tasks.form,
+        createTask = _tasks.createTask;
+
+    var categories = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return store.getters['category/categories'];
+    });
+    return {
+      categories: categories,
+      loading: loading,
+      validateErrors: validateErrors,
+      createTask: createTask,
+      form: form
+    };
+  }
 });
 
 /***/ }),
@@ -19433,12 +19459,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _TaskComments__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TaskComments */ "./resources/js/components/TaskComments.vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var _TaskComments__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TaskComments */ "./resources/js/components/TaskComments.vue");
+/* harmony import */ var _composables_tasks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../composables/tasks */ "./resources/js/composables/tasks.js");
+
+
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'Tasks',
   components: {
-    TaskComments: _TaskComments__WEBPACK_IMPORTED_MODULE_0__["default"]
+    TaskComments: _TaskComments__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  setup: function setup() {
+    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.useStore)();
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
+      store.dispatch('tasks/getTasks');
+    });
+
+    var _taskOps = (0,_composables_tasks__WEBPACK_IMPORTED_MODULE_2__["default"])(),
+        changeStatus = _taskOps.changeStatus;
+
+    var statusClass = function statusClass(status) {
+      if (status === 'done') {
+        return 'todo-item-success';
+      }
+
+      if (status === 'doing') {
+        return 'todo-item-warning';
+      }
+
+      return 'todo-item-info';
+    };
+
+    var tasks = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return store.getters['tasks/tasks'];
+    });
+    return {
+      tasks: tasks,
+      statusClass: statusClass,
+      changeStatus: changeStatus
+    };
   }
 });
 
@@ -19703,10 +19765,92 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<h5>Create New Task</h5><form action=\"#\" class=\"row px-2 align-items-center\"><div class=\"col-md-3 px-1 mt-2\"><input type=\"text\" class=\"form-control add-task\" placeholder=\"New Task...\"></div><div class=\"col-md-3 px-1 mt-2\"><select name=\"category\" id=\"cat\" class=\"form-control\"><option value=\"0\">None</option><option value=\"1\">Cast</option></select></div><div class=\"col-md-2 px-1 px-md-4 mt-2\"><label><input type=\"checkbox\" class=\"form-check-inline\" name=\"is_public\" id=\"\">Make Public</label></div><div class=\"col-md-2 px-1 mt-2 d-flex justify-content-end\"><button class=\"btn btn-info btn-sm\">Create</button></div></form>", 2);
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Create New Task", -1
+/* HOISTED */
+);
+
+var _hoisted_2 = {
+  "class": "col-md-3 px-1 mt-2"
+};
+var _hoisted_3 = {
+  key: 0,
+  "class": "invalid-feedback d-block"
+};
+var _hoisted_4 = {
+  "class": "col-md-3 px-1 mt-2"
+};
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "0"
+}, "None", -1
+/* HOISTED */
+);
+
+var _hoisted_6 = ["value"];
+var _hoisted_7 = {
+  "class": "col-md-2 px-1 px-md-4 mt-2"
+};
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Make Public");
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "col-md-2 px-1 mt-2 d-flex justify-content-end"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  type: "submit",
+  "class": "btn btn-info btn-sm"
+}, "Create")], -1
+/* HOISTED */
+);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return _hoisted_1;
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    action: "#",
+    "class": "row px-2 align-items-center",
+    onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $setup.createTask && $setup.createTask.apply($setup, arguments);
+    }, ["prevent"]))
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $setup.form.title = $event;
+    }),
+    "class": "form-control add-task",
+    placeholder: "New Task..."
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.form.title]]), $setup.validateErrors.title ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.validateErrors.title[0]), 1
+  /* TEXT */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $setup.form.category_id = $event;
+    }),
+    id: "cat",
+    "class": "form-control"
+  }, [_hoisted_5, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.categories, function (c, i) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
+      key: i,
+      value: c.id
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(c.name), 9
+    /* TEXT, PROPS */
+    , _hoisted_6);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))], 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $setup.form.category_id]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "checkbox",
+    "class": "form-check-inline",
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $setup.form.is_public = $event;
+    }),
+    id: ""
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelCheckbox, $setup.form.is_public]]), _hoisted_8])]), _hoisted_9], 32
+  /* HYDRATE_EVENTS */
+  )], 64
+  /* STABLE_FRAGMENT */
+  );
 }
 
 /***/ }),
@@ -19794,18 +19938,95 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_2 = {
   "class": "todo-list"
 };
-var _hoisted_3 = {
-  "class": "todo-item todo-item-info align-items-center"
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_4 = {
+  "class": "float-right d-flex align-items-center remove-todo-item"
 };
 
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div><span>Create theme dsddsdscfwerfrwfvsdfbgdfvsasfdgfhndfs</span><div class=\"float-right d-flex align-items-center remove-todo-item\"><span><i class=\"fa fa-eye text-primary mx-2\" title=\"Public/Private\" style=\"cursor:pointer;font-size:15px;\"></i></span><i class=\"fa fa-trash text-danger mx-2\" title=\"Delete Task\" style=\"cursor:pointer;font-size:15px;\"></i><select class=\"form-control form-control-sm\"><option value=\"done\">Done</option><option value=\"doing\">Doing</option><option value=\"todo\">To Do</option></select></div></div>", 1);
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "fa fa-trash text-danger mx-2",
+  title: "Delete Task",
+  style: {
+    "cursor": "pointer",
+    "font-size": "15px"
+  }
+}, null, -1
+/* HOISTED */
+);
 
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"todo-item todo-item-warning\"><span>Work on wordpress</span><span class=\"float-right remove-todo-item\"><i class=\"icon-close text-warning\"></i></span></div><div class=\"todo-item todo-item-success\"><span>Organize office main department</span><a href=\"#\" class=\"float-right remove-todo-item\"><i class=\"icon-close\"></i></a></div><div class=\"todo-item\"><span>Error solve in HTML template</span><a href=\"#\" class=\"float-right remove-todo-item\"><i class=\"icon-close\"></i></a></div>", 3);
+var _hoisted_6 = ["onUpdate:modelValue", "onChange"];
 
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "done"
+}, "Done", -1
+/* HOISTED */
+);
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "doing"
+}, "Doing", -1
+/* HOISTED */
+);
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "todo"
+}, "To Do", -1
+/* HOISTED */
+);
+
+var _hoisted_10 = [_hoisted_7, _hoisted_8, _hoisted_9];
+var _hoisted_11 = {
+  key: 1,
+  "class": "todo-item todo-item-info"
+};
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "No Tasks Yet !!!", -1
+/* HOISTED */
+);
+
+var _hoisted_13 = [_hoisted_12];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_task_comments = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("task-comments");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_task_comments)]), _hoisted_5])], 64
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$setup.tasks.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+    key: 0
+  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.tasks, function (t, i) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      key: i,
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['todo-item align-items-center', $setup.statusClass(t.status)])
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(t.title), 1
+    /* TEXT */
+    ), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(t.category.name), 1
+    /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+      "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(['fa text-primary mx-2', t.visibility === 'public' ? 'fa-eye' : 'fa-eye-slash']),
+      title: "Public/Private",
+      style: {
+        "cursor": "pointer",
+        "font-size": "15px"
+      }
+    }, null, 2
+    /* CLASS */
+    )]), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+      "onUpdate:modelValue": function onUpdateModelValue($event) {
+        return t.status = $event;
+      },
+      "class": "form-control form-control-sm",
+      onChange: function onChange($event) {
+        return $setup.changeStatus(t.slug, t.status);
+      }
+    }, _hoisted_10, 40
+    /* PROPS, HYDRATE_EVENTS */
+    , _hoisted_6), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, t.status]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_task_comments)], 2
+    /* CLASS */
+    );
+  }), 128
+  /* KEYED_FRAGMENT */
+  )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_11, _hoisted_13))])], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -20395,6 +20616,69 @@ function category() {
 
 /***/ }),
 
+/***/ "./resources/js/composables/tasks.js":
+/*!*******************************************!*\
+  !*** ./resources/js/composables/tasks.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ tasks)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var _plugins_axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../plugins/axios */ "./resources/js/plugins/axios.js");
+
+
+
+function tasks() {
+  var form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
+    title: '',
+    category_id: 0,
+    is_public: false
+  });
+  var validateErrors = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
+  var loading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
+  var store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.useStore)();
+
+  var createTask = function createTask() {
+    loading.value = true;
+    validateErrors.value = [];
+    _plugins_axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/tasks', form).then(function (response) {
+      store.commit('tasks/ADD_TASK', response.data.task);
+      loading.value = false;
+      form.title = '';
+      form.category_id = 0;
+      form.is_public = false;
+    })["catch"](function (error) {
+      if (error.response && error.response.status === 422) {
+        validateErrors.value = error.response.data.errors;
+      }
+
+      loading.value = false;
+    });
+  };
+
+  var changeStatus = function changeStatus(slug, status) {
+    store.dispatch('tasks/updateStatus', {
+      slug: slug,
+      status: status
+    });
+  };
+
+  return {
+    form: form,
+    loading: loading,
+    validateErrors: validateErrors,
+    createTask: createTask,
+    changeStatus: changeStatus
+  };
+}
+
+/***/ }),
+
 /***/ "./resources/js/plugins/axios.js":
 /*!***************************************!*\
   !*** ./resources/js/plugins/axios.js ***!
@@ -20584,16 +20868,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _modules_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/auth */ "./resources/js/store/modules/auth.js");
 /* harmony import */ var _modules_category__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/category */ "./resources/js/store/modules/category.js");
+/* harmony import */ var _modules_tasks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/tasks */ "./resources/js/store/modules/tasks.js");
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vuex__WEBPACK_IMPORTED_MODULE_2__.createStore)({
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vuex__WEBPACK_IMPORTED_MODULE_3__.createStore)({
   modules: {
     auth: _modules_auth__WEBPACK_IMPORTED_MODULE_0__["default"],
-    category: _modules_category__WEBPACK_IMPORTED_MODULE_1__["default"]
+    category: _modules_category__WEBPACK_IMPORTED_MODULE_1__["default"],
+    tasks: _modules_tasks__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   strict: false
 }));
@@ -20719,7 +21006,7 @@ var getters = {
   }
 };
 var mutations = {
-  SET_CATEGORY: function SET_CATEGORY(state, value) {
+  SET_CATEGORIES: function SET_CATEGORIES(state, value) {
     state.categories = value;
   },
   ADD_CATEGORY: function ADD_CATEGORY(state, value) {
@@ -20735,13 +21022,92 @@ var actions = {
   getCategories: function getCategories(_ref) {
     var commit = _ref.commit;
     return _plugins_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/categories').then(function (response) {
-      commit('SET_CATEGORY', response.data.categories);
+      commit('SET_CATEGORIES', response.data.categories);
     });
   },
   deleteCategory: function deleteCategory(_ref2, slug) {
     var commit = _ref2.commit;
     return _plugins_axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/categories/".concat(slug)).then(function () {
       commit('REMOVE_CATEGORY', slug);
+    });
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  namespaced: true,
+  state: state,
+  getters: getters,
+  actions: actions,
+  mutations: mutations
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/tasks.js":
+/*!*********************************************!*\
+  !*** ./resources/js/store/modules/tasks.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _plugins_axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../plugins/axios */ "./resources/js/plugins/axios.js");
+/* eslint-disable no-shadow,no-param-reassign */
+
+
+var state = function state() {
+  return {
+    tasks: []
+  };
+};
+
+var getters = {
+  tasks: function tasks(state) {
+    return state.tasks;
+  }
+};
+var mutations = {
+  SET_TASKS: function SET_TASKS(state, value) {
+    state.tasks = value;
+  },
+  ADD_TASK: function ADD_TASK(state, value) {
+    state.tasks.unshift(value);
+  },
+  UPDATE_TASK_STATUS: function UPDATE_TASK_STATUS(state, task) {
+    var index = state.tasks.findIndex(function (t) {
+      return t.slug === task.slug;
+    });
+    state.tasks[index].status = task.status;
+  },
+  REMOVE_TASK: function REMOVE_TASK(state, slug) {
+    state.tasks = state.tasks.filter(function (i) {
+      return i.slug !== slug;
+    });
+  }
+};
+var actions = {
+  getTasks: function getTasks(_ref) {
+    var commit = _ref.commit;
+    return _plugins_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/tasks').then(function (response) {
+      commit('SET_TASKS', response.data.tasks);
+    });
+  },
+  updateStatus: function updateStatus(_ref2, _ref3) {
+    var commit = _ref2.commit;
+    var slug = _ref3.slug,
+        status = _ref3.status;
+    return _plugins_axios__WEBPACK_IMPORTED_MODULE_0__["default"].put("/tasks/".concat(slug, "/status"), {
+      status: status
+    }).then(function (response) {
+      commit('UPDATE_TASK_STATUS', response.data.task);
+    });
+  },
+  deleteTask: function deleteTask(_ref4, slug) {
+    var commit = _ref4.commit;
+    return _plugins_axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/tasks/".concat(slug)).then(function () {
+      commit('REMOVE_TASK', slug);
     });
   }
 };

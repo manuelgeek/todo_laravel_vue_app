@@ -10,7 +10,7 @@ const getters = {
 };
 
 const mutations = {
-  SET_CATEGORY(state, value) {
+  SET_CATEGORIES(state, value) {
     state.categories = value;
   },
   ADD_CATEGORY(state, value) {
@@ -24,7 +24,7 @@ const mutations = {
 const actions = {
   getCategories({ commit }) {
     return axios.get('/categories').then((response) => {
-      commit('SET_CATEGORY', response.data.categories);
+      commit('SET_CATEGORIES', response.data.categories);
     });
   },
   deleteCategory({ commit }, slug) {

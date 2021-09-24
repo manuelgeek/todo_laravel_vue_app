@@ -34,6 +34,7 @@ class CategoryTransformer extends TransformerAbstract
     public function transform(Category $category)
     {
         return [
+            'id' => $category->id,
             'name' => $category->name,
             'slug' => $category->slug,
             'created_at' => Helper::getTimestampFromDateString($category->created_at)
