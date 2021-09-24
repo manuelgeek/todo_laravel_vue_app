@@ -36,7 +36,7 @@ export default function tasks() {
   };
 
   const changeVisibility = async (slug) => {
-    await store.dispatch('tasks/updateVisibilty', slug);
+    await store.dispatch('tasks/updateVisibility', slug);
   };
 
   const deleteCategory = async (slug) => {

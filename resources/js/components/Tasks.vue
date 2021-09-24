@@ -23,7 +23,7 @@
                         </select>
                     </div>
                 </div>
-                <task-comments />
+                <task-comments :task="t" :key="i" />
             </div>
         </template>
         <div v-else class="todo-item todo-item-info">

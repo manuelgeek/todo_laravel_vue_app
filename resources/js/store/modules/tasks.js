@@ -40,7 +40,7 @@ const actions = {
       commit('UPDATE_TASK_STATUS', response.data.task);
     });
   },
-  updateVisibilty({ commit }, slug) {
+  updateVisibility({ commit }, slug) {
     return axios.get(`/tasks/${slug}/visibility`).then((response) => {
       commit('UPDATE_TASK_VISIBILITY', response.data.task);
     });
