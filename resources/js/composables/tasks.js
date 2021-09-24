@@ -62,6 +62,10 @@ export default function tasks() {
     await store.dispatch('tasks/getTasks', `/tasks?status=${status}`);
   };
 
+  const filterWithCategory = async (id) => {
+    await store.dispatch('tasks/getTasks', `/tasks?category=${id}`);
+  };
+
   return {
     form,
     loading,
@@ -74,5 +78,6 @@ export default function tasks() {
     pagination,
     loadingMore,
     filterWithStatus,
+    filterWithCategory,
   };
 }

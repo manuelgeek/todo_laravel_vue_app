@@ -19687,18 +19687,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var _composables_tasks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../composables/tasks */ "./resources/js/composables/tasks.js");
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'CategoryFilter',
   setup: function setup() {
-    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_1__.useStore)();
+    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.useStore)();
     var categories = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
       return store.getters['category/categories'];
     });
+
+    var _tasks = (0,_composables_tasks__WEBPACK_IMPORTED_MODULE_1__["default"])(),
+        filterWithCategory = _tasks.filterWithCategory;
+
     return {
-      categories: categories
+      categories: categories,
+      filterWithCategory: filterWithCategory
     };
   }
 });
@@ -20410,23 +20417,19 @@ var _hoisted_3 = {
   "class": "dropdown-menu",
   "aria-labelledby": "navbarDropdown"
 };
-
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  "class": "dropdown-item",
-  href: "#"
-}, "Default", -1
-/* HOISTED */
-);
-
+var _hoisted_4 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.categories, function (c, i) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.categories, function (c, i) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
       key: i,
       "class": "dropdown-item",
-      href: "#"
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(c.name), 1
-    /* TEXT */
-    );
+      href: "#",
+      onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+        return $setup.filterWithCategory(c.id);
+      }, ["prevent"])
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(c.name), 9
+    /* TEXT, PROPS */
+    , _hoisted_4);
   }), 128
   /* KEYED_FRAGMENT */
   ))])]);
@@ -21086,6 +21089,28 @@ function tasks() {
     };
   }();
 
+  var filterWithCategory = /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6(id) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              _context6.next = 2;
+              return store.dispatch('tasks/getTasks', "/tasks?category=".concat(id));
+
+            case 2:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6);
+    }));
+
+    return function filterWithCategory(_x6) {
+      return _ref6.apply(this, arguments);
+    };
+  }();
+
   return {
     form: form,
     loading: loading,
@@ -21097,7 +21122,8 @@ function tasks() {
     loadMore: loadMore,
     pagination: pagination,
     loadingMore: loadingMore,
-    filterWithStatus: filterWithStatus
+    filterWithStatus: filterWithStatus,
+    filterWithCategory: filterWithCategory
   };
 }
 

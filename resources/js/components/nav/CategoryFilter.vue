@@ -4,8 +4,7 @@
             Filter with Category
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Default</a>
-            <a v-for="(c, i) of categories" :key="i" class="dropdown-item" href="#">{{ c.name }}</a>
+            <a v-for="(c, i) of categories" :key="i" class="dropdown-item" href="#" @click.prevent="filterWithCategory(c.id)">{{ c.name }}</a>
         </div>
     </li>
 </template>
@@ -13,6 +12,7 @@
 <script>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
+import tasks from '../../composables/tasks';
 
 export default {
   name: 'CategoryFilter',
@@ -20,8 +20,11 @@ export default {
     const store = useStore();
     const categories = computed(() => store.getters['category/categories']);
 
+    const { filterWithCategory } = tasks();
+
     return {
       categories,
+      filterWithCategory,
     };
   },
 };
