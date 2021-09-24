@@ -9,7 +9,7 @@
         </div>
         <div class="col-md-3 px-1 mt-2">
             <select v-model="form.category_id" id="cat" class="form-control">
-                <option value="0">None</option>
+                <option value="0">Default</option>
                 <option v-for="(c, i) of categories" :key="i" :value="c.id">{{ c.name }}</option>
             </select>
         </div>

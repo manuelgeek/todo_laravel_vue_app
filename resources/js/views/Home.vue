@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" role="main">
       <top-nav/>
       <div class="container">
           <div class="row">
