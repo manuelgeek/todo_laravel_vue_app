@@ -117,6 +117,9 @@ class TasksController extends Controller
         $query = $query->when(\request()->has('status') && \request()->status !== null, function ($q) {
             $q->whereStatus(\request()->status);
         });
+        $query = $query->when(\request()->has('category') && \request()->category !== null, function ($q) {
+            $q->where('category_id', \request()->category);
+        });
         return $query->where('user_id', $user_id);
     }
 }
