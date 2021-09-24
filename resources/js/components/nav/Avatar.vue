@@ -12,6 +12,7 @@
 <script>
 import { computed } from 'vue';
 import { useStore } from 'vuex';
+import axios from 'axios';
 import router from '../../router';
 
 export default {
@@ -21,7 +22,6 @@ export default {
     const user = computed(() => store.state.auth.user);
 
     const logout = () => {
-      // eslint-disable-next-line no-undef
       axios.post('logout').then(() => {
         store.dispatch('auth/signOut').then(() => {
           router.push({ name: 'Login' });

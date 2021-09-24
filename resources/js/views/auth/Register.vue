@@ -36,7 +36,7 @@
 
                 <div class="form-group m-0">
                     <button type="submit" class="btn btn-primary btn-block" :disabled="loading">
-                        Login
+                        Register
                     </button>
                 </div>
                 <div class="mt-4 text-center">

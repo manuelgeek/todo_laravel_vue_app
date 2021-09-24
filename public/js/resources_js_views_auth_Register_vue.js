@@ -321,7 +321,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         type: "submit",
         "class": "btn btn-primary btn-block",
         disabled: $setup.loading
-      }, " Login ", 8
+      }, " Register ", 8
       /* PROPS */
       , _hoisted_17)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
         to: {

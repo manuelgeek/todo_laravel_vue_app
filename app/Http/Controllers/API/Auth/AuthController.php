@@ -40,13 +40,14 @@ class AuthController extends Controller
      */
     public function login(Request $request): \Illuminate\Http\JsonResponse
     {
-        $credentials = $request->validate([
+        $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
+            'remember' => ['required', 'boolean']
         ]);
 
         // for sanctum cookie auth
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($request->only(['email', 'password']), $request->remember)) {
             $user = User::where('email', $request->email)->first();
 
             return response()->json([
