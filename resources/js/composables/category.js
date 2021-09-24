@@ -1,7 +1,6 @@
 import { reactive, ref } from 'vue';
 import { useStore } from 'vuex';
 import axios from '../plugins/axios';
-import { clearForm } from '../utils/helpers';
 
 export default function category() {
   const form = reactive({
@@ -19,7 +18,7 @@ export default function category() {
       .then((response) => {
         store.commit('category/ADD_CATEGORY', response.data.category);
         loading.value = false;
-        clearForm(form);
+        form.name = '';
       }).catch((error) => {
         if (error.response && error.response.status === 422) {
           validateErrors.value = error.response.data.errors;
@@ -28,10 +27,15 @@ export default function category() {
       });
   };
 
+  const deleteCategory = async (slug) => {
+    await store.dispatch('category/deleteCategory', slug);
+  };
+
   return {
     form,
     loading,
     createCategory,
     validateErrors,
+    deleteCategory,
   };
 }

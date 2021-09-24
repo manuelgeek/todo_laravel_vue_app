@@ -19536,8 +19536,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _category_CreateCategory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../category/CreateCategory */ "./resources/js/components/category/CreateCategory.vue");
+/* harmony import */ var _composables_category__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../composables/category */ "./resources/js/composables/category.js");
+
 
 
 
@@ -19547,7 +19549,11 @@ __webpack_require__.r(__webpack_exports__);
     CreateCategory: _category_CreateCategory__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   setup: function setup() {
-    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_2__.useStore)();
+    var store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.useStore)();
+
+    var _category = (0,_composables_category__WEBPACK_IMPORTED_MODULE_2__["default"])(),
+        deleteCategory = _category.deleteCategory;
+
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
       store.dispatch('category/getCategories');
     });
@@ -19555,7 +19561,8 @@ __webpack_require__.r(__webpack_exports__);
       return store.getters['category/categories'];
     });
     return {
-      categories: categories
+      categories: categories,
+      deleteCategory: deleteCategory
     };
   }
 });
@@ -19952,18 +19959,7 @@ var _hoisted_6 = {
 var _hoisted_7 = {
   "class": "list-unstyled"
 };
-
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "fa fa-trash text-danger mx-2 float-right",
-  title: "Delete category",
-  style: {
-    "cursor": "pointer",
-    "font-size": "15px"
-  }
-}, null, -1
-/* HOISTED */
-);
-
+var _hoisted_8 = ["onClick"];
 var _hoisted_9 = {
   key: 1,
   "class": "comment-item p-2 mt-2"
@@ -19979,7 +19975,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "comment-item p-2 mt-2"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(c.name) + " ", 1
     /* TEXT */
-    ), _hoisted_8]);
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+      onClick: function onClick($event) {
+        return $setup.deleteCategory(c.slug);
+      },
+      "class": "fa fa-trash text-danger mx-2 float-right",
+      title: "Delete category",
+      style: {
+        "cursor": "pointer",
+        "font-size": "15px"
+      }
+    }, null, 8
+    /* PROPS */
+    , _hoisted_8)]);
   }), 128
   /* KEYED_FRAGMENT */
   )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", _hoisted_9, "No Categories yet"))])])])])])], 64
@@ -20302,15 +20310,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _plugins_axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../plugins/axios */ "./resources/js/plugins/axios.js");
-/* harmony import */ var _utils_helpers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/helpers */ "./resources/js/utils/helpers.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 
 
 
@@ -20321,7 +20327,7 @@ function category() {
   });
   var validateErrors = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)([]);
   var loading = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(false);
-  var store = (0,vuex__WEBPACK_IMPORTED_MODULE_4__.useStore)();
+  var store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.useStore)();
 
   var createCategory = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -20334,7 +20340,7 @@ function category() {
               _plugins_axios__WEBPACK_IMPORTED_MODULE_2__["default"].post('/categories', form).then(function (response) {
                 store.commit('category/ADD_CATEGORY', response.data.category);
                 loading.value = false;
-                (0,_utils_helpers__WEBPACK_IMPORTED_MODULE_3__.clearForm)(form);
+                form.name = '';
               })["catch"](function (error) {
                 if (error.response && error.response.status === 422) {
                   validateErrors.value = error.response.data.errors;
@@ -20356,11 +20362,34 @@ function category() {
     };
   }();
 
+  var deleteCategory = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(slug) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return store.dispatch('category/deleteCategory', slug);
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function deleteCategory(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
   return {
     form: form,
     loading: loading,
     createCategory: createCategory,
-    validateErrors: validateErrors
+    validateErrors: validateErrors,
+    deleteCategory: deleteCategory
   };
 }
 
@@ -20695,6 +20724,11 @@ var mutations = {
   },
   ADD_CATEGORY: function ADD_CATEGORY(state, value) {
     state.categories.unshift(value);
+  },
+  REMOVE_CATEGORY: function REMOVE_CATEGORY(state, slug) {
+    state.categories = state.categories.filter(function (i) {
+      return i.slug !== slug;
+    });
   }
 };
 var actions = {
@@ -20702,6 +20736,12 @@ var actions = {
     var commit = _ref.commit;
     return _plugins_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/categories').then(function (response) {
       commit('SET_CATEGORY', response.data.categories);
+    });
+  },
+  deleteCategory: function deleteCategory(_ref2, slug) {
+    var commit = _ref2.commit;
+    return _plugins_axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/categories/".concat(slug)).then(function () {
+      commit('REMOVE_CATEGORY', slug);
     });
   }
 };
@@ -20711,30 +20751,6 @@ var actions = {
   getters: getters,
   actions: actions,
   mutations: mutations
-});
-
-/***/ }),
-
-/***/ "./resources/js/utils/helpers.js":
-/*!***************************************!*\
-  !*** ./resources/js/utils/helpers.js ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* eslint-disable no-param-reassign */
-var clearForm = function clearForm(data) {
-  Object.keys(data).forEach(function (key) {
-    data[key] = '';
-  });
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  clearForm: clearForm
 });
 
 /***/ }),

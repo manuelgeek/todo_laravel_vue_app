@@ -15,7 +15,7 @@
                     <ul class="list-unstyled">
                         <template v-if="categories.length > 0">
                             <li v-for="(c, i) of categories" :key="i" class="comment-item p-2 mt-2">{{
-                                    c.name }} <i class="fa fa-trash text-danger mx-2 float-right" title="Delete category" style="cursor: pointer; font-size: 15px"></i> </li>
+                                    c.name }} <i @click="deleteCategory(c.slug)" class="fa fa-trash text-danger mx-2 float-right" title="Delete category" style="cursor: pointer; font-size: 15px"></i> </li>
                         </template>
                         <li v-else class="comment-item p-2 mt-2">No Categories yet</li>
                     </ul>
@@ -29,12 +29,15 @@
 import { computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import CreateCategory from '../category/CreateCategory';
+import category from '../../composables/category';
 
 export default {
   name: 'Categories',
   components: { CreateCategory },
   setup() {
     const store = useStore();
+
+    const { deleteCategory } = category();
 
     onMounted(() => {
       store.dispatch('category/getCategories');
@@ -44,6 +47,7 @@ export default {
 
     return {
       categories,
+      deleteCategory,
     };
   },
 };

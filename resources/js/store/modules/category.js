@@ -16,12 +16,20 @@ const mutations = {
   ADD_CATEGORY(state, value) {
     state.categories.unshift(value);
   },
+  REMOVE_CATEGORY(state, slug) {
+    state.categories = state.categories.filter((i) => i.slug !== slug);
+  },
 };
 
 const actions = {
   getCategories({ commit }) {
     return axios.get('/categories').then((response) => {
       commit('SET_CATEGORY', response.data.categories);
+    });
+  },
+  deleteCategory({ commit }, slug) {
+    return axios.delete(`/categories/${slug}`).then(() => {
+      commit('REMOVE_CATEGORY', slug);
     });
   },
 };
