@@ -10,6 +10,9 @@ use App\Models\User;
 use App\Services\Helper;
 use App\Transformers\TaskTransformer;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
 use Illuminate\Validation\Rule;
 
 class TasksController extends Controller
@@ -49,6 +52,8 @@ class TasksController extends Controller
         $data['status'] = Task::TODO;
 
         $task = auth()->user()->tasks()->create($data);
+
+        Task::addAllToIndex();
 
         return response()->json(['task' => fractal($task, new TaskTransformer())]);
     }
@@ -109,6 +114,26 @@ class TasksController extends Controller
         $comment->delete();
 
         return response()->json(['message' => 'Task comment deleted!']);
+    }
+
+    public function search(): \Illuminate\Http\JsonResponse
+    {
+        if(\request()->has('search') && \request()->search !== null){
+            $tasks = Task::searchByQuery(['match' => ['title' => request()->search]]);
+            $tasks = $tasks->reject(function ($t) {
+               return  $t->user_id !== auth()->id();
+            });
+            $tasks = $this->paginate($tasks);
+            dd(get_paginator_meta_data($tasks));
+        }
+        return response()->json(['tasks' => []]);
+    }
+
+    public function paginate($items, $perPage = 15, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
     private function queryTasks($user_id)

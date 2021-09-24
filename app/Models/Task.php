@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Elasticquent\ElasticquentTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Task extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, ElasticquentTrait;
 
     const TODO = 'todo';
     const DOING = 'doing';
@@ -17,6 +18,17 @@ class Task extends Model
     protected $fillable = ['title', 'slug', 'description', 'is_public', 'status', 'category_id'];
 
     protected $with = ['category'];
+
+    protected $mappingProperties = array(
+        'title' => [
+            'type' => 'text',
+            "analyzer" => "standard",
+        ],
+        'description' => [
+            'type' => 'text',
+            "analyzer" => "standard",
+        ],
+    );
 
     public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

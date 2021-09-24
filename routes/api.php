@@ -37,6 +37,7 @@ Route::group(['namespace' => 'API', 'prefix' => 'v1'], function () {
         // get user tasks and categories
         Route::apiResource('categories', 'CategoriesController')->parameters(['categories' => 'category:slug']);
         Route::apiResource('tasks', 'TasksController')->parameters(['tasks' => 'task:slug']);
+        Route::get('search/tasks', 'TasksController@search');
         Route::get('user/{user}/tasks', 'TasksController@userTasks');
         Route::get('/tasks/{task:slug}/comments', 'TasksController@indexComment');
         Route::post('/tasks/{task:slug}/comments', 'TasksController@storeComment');
