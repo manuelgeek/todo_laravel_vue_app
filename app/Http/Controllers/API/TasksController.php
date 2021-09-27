@@ -123,13 +123,16 @@ class TasksController extends Controller
             $tasks = $tasks->reject(function ($t) {
                return  $t->user_id !== auth()->id();
             });
-            $tasks = $this->paginate($tasks);
-            dd(get_paginator_meta_data($tasks));
+            $tasks = $this->paginate($tasks, 8, \request()->page);
+            return response()->json([
+                'tasks' => fractal($tasks->getCollection(), new TaskTransformer()),
+                'pagination' => get_paginator_meta_data($tasks)
+            ]);
         }
-        return response()->json(['tasks' => []]);
+        return response()->json(['tasks' => [], 'pagination' => (object) []]);
     }
 
-    public function paginate($items, $perPage = 15, $page = null, $options = [])
+    private function paginate($items, $perPage = 15, $page = null, $options = []): LengthAwarePaginator
     {
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
         $items = $items instanceof Collection ? $items : Collection::make($items);
