@@ -19723,8 +19723,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _composables_tasks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../composables/tasks */ "./resources/js/composables/tasks.js");
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: 'Search'
+  name: 'Search',
+  setup: function setup() {
+    var param = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)('');
+
+    var _tasks = (0,_composables_tasks__WEBPACK_IMPORTED_MODULE_1__["default"])(),
+        searchTasks = _tasks.searchTasks; // eslint-disable-next-line no-unused-vars
+
+
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(param, function (newParam, _prevParam) {
+      if (newParam) searchTasks(newParam);
+    });
+    return {
+      param: param
+    };
+  }
 });
 
 /***/ }),
@@ -20453,19 +20471,18 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "form-inline my-2 my-lg-0"
 };
-
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  "class": "form-control mr-sm-2",
-  type: "search",
-  placeholder: "Search",
-  "aria-label": "Search"
-}, null, -1
-/* HOISTED */
-);
-
-var _hoisted_3 = [_hoisted_2];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", _hoisted_1, _hoisted_3);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $setup.param = $event;
+    }),
+    "class": "form-control mr-sm-2",
+    type: "search",
+    placeholder: "Search",
+    "aria-label": "Search"
+  }, null, 512
+  /* NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.param]])]);
 }
 
 /***/ }),
@@ -21111,6 +21128,28 @@ function tasks() {
     };
   }();
 
+  var searchTasks = /*#__PURE__*/function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7(param) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              _context7.next = 2;
+              return store.dispatch('tasks/searchTasks', param);
+
+            case 2:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, _callee7);
+    }));
+
+    return function searchTasks(_x7) {
+      return _ref7.apply(this, arguments);
+    };
+  }();
+
   return {
     form: form,
     loading: loading,
@@ -21123,7 +21162,8 @@ function tasks() {
     pagination: pagination,
     loadingMore: loadingMore,
     filterWithStatus: filterWithStatus,
-    filterWithCategory: filterWithCategory
+    filterWithCategory: filterWithCategory,
+    searchTasks: searchTasks
   };
 }
 
@@ -21560,30 +21600,36 @@ var actions = {
       commit('SET_TASKS', response.data);
     });
   },
-  loadMoreTasks: function loadMoreTasks(_ref2, url) {
+  searchTasks: function searchTasks(_ref2, param) {
     var commit = _ref2.commit;
+    return _plugins_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get("/search/tasks?search=".concat(param)).then(function (response) {
+      commit('SET_TASKS', response.data);
+    });
+  },
+  loadMoreTasks: function loadMoreTasks(_ref3, url) {
+    var commit = _ref3.commit;
     return _plugins_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(url).then(function (response) {
       commit('UPDATE_TASKS', response.data);
     });
   },
-  updateStatus: function updateStatus(_ref3, _ref4) {
-    var commit = _ref3.commit;
-    var slug = _ref4.slug,
-        status = _ref4.status;
+  updateStatus: function updateStatus(_ref4, _ref5) {
+    var commit = _ref4.commit;
+    var slug = _ref5.slug,
+        status = _ref5.status;
     return _plugins_axios__WEBPACK_IMPORTED_MODULE_0__["default"].put("/tasks/".concat(slug, "/status"), {
       status: status
     }).then(function (response) {
       commit('UPDATE_TASK_STATUS', response.data.task);
     });
   },
-  updateVisibility: function updateVisibility(_ref5, slug) {
-    var commit = _ref5.commit;
+  updateVisibility: function updateVisibility(_ref6, slug) {
+    var commit = _ref6.commit;
     return _plugins_axios__WEBPACK_IMPORTED_MODULE_0__["default"].get("/tasks/".concat(slug, "/visibility")).then(function (response) {
       commit('UPDATE_TASK_VISIBILITY', response.data.task);
     });
   },
-  deleteTask: function deleteTask(_ref6, slug) {
-    var commit = _ref6.commit;
+  deleteTask: function deleteTask(_ref7, slug) {
+    var commit = _ref7.commit;
     return _plugins_axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/tasks/".concat(slug)).then(function () {
       commit('REMOVE_TASK', slug);
     });

@@ -42,6 +42,11 @@ const actions = {
       commit('SET_TASKS', response.data);
     });
   },
+  searchTasks({ commit }, param) {
+    return axios.get(`/search/tasks?search=${param}`).then((response) => {
+      commit('SET_TASKS', response.data);
+    });
+  },
   loadMoreTasks({ commit }, url) {
     return axios.get(url).then((response) => {
       commit('UPDATE_TASKS', response.data);
