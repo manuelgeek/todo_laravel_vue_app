@@ -12,13 +12,12 @@ Laravel and Vue 3 TODO App
 
 `cp .env.example .env`
 
-
-
 ### ENV config:
 
 - Add database, Email, AWS, s3 configs to `.env`
 
 - Add the necessary env values; database, email, app name, app url etc
+- To test for reset password, set email variables, alternatively, set `MAIL_HOST=log` for local email testing
     
 Create database tables and run seeder. The seeder sets up a user account.
 
@@ -32,6 +31,36 @@ Create database tables and run seeder. The seeder sets up a user account.
 #### start server
 
 `php artisan serve`
+
+## Docker 
+### Set up
+- Make sure you have docker installed
+- Assumes you have your .env file - in case you're using automated CD/CD -  you can add step to create .env from .env.example and adding values,
+
+database env vars - for demo purposes inside docker
+```dotenv
+DB_CONNECTION=mysql
+DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=todo_laravel_vue_app
+DB_USERNAME=root
+DB_PASSWORD=password
+```
+
+### Start docker
+`docker-compose up -d`
+
+optional 
+
+`docker-compose exec app php artisan config:cache`
+
+you can run more commands via
+
+`docker-compose exec app [command here]`
+
+access you app via 
+
+`http:your_ip:8000`
 
 ## APIs Postman Collection
 https://www.getpostman.com/collections/8b7fb39d21cd94b2c310
