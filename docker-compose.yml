@@ -17,6 +17,11 @@ services:
         volumes:
             - ./:/var/www
             - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+        depends_on:
+            - db
+            - elasticsearch
+        links:
+            - db
         networks:
             - app-network
 
@@ -28,7 +33,7 @@ services:
         tty: true
         ports:
             - "8000:80"
-            - "4431:443"
+#            - "4431:443"
         volumes:
             - ./:/var/www
             - ./nginx/conf.d/:/etc/nginx/conf.d/
@@ -40,6 +45,7 @@ services:
         image: mysql:5.7.22
         container_name: db
         restart: unless-stopped
+        command: --default-authentication-plugin=mysql_native_password
         tty: true
         ports:
             - "3306:3306"

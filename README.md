@@ -50,6 +50,10 @@ DB_PASSWORD=password
 ### Start docker
 `docker-compose up -d`
 
+rum migrations
+
+`docker-compose exec app php artisan migrate`
+
 optional 
 
 `docker-compose exec app php artisan config:cache`
@@ -62,6 +66,10 @@ access you app via
 
 `http:your_ip:8000`
 
+[extra] - to force  create images
+
+`docker-compose up -d --force-recreate --no-deps --build`
+
 ## APIs Postman Collection
 https://www.getpostman.com/collections/8b7fb39d21cd94b2c310
 
@@ -73,6 +81,7 @@ https://documenter.getpostman.com/view/3385291/UUxwBTm3
 - Edit category
 - Edit Task
 - Handle task pagination - maybe use infinite scroll
+- Looked more 
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

@@ -54,7 +54,6 @@ USER www
 RUN composer install
 
 RUN php artisan key:generate --ansi
-RUN php artisan migrate --force
 
 RUN ls
 
