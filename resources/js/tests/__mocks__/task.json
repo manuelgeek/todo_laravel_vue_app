@@ -1,0 +1,15 @@
+{
+    "task": {
+        "title": "Go Shopping",
+        "slug": "go-shopping-gCX",
+        "description": "Shopping",
+        "category": {
+            "name": "Business",
+            "slug": "business-65b",
+            "created_at": "2021-09-22 15:54:24"
+        },
+        "status": "todo",
+        "visibility": "public",
+        "created_at": "2021-09-22 16:14:16"
+    }
+}

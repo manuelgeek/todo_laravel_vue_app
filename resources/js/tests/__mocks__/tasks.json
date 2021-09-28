@@ -1,0 +1,111 @@
+{
+    "tasks": [
+        {
+            "title": "new task",
+            "slug": "new-task-I6T",
+            "description": "Shopping",
+            "category": {
+                "id": 2,
+                "name": "Business",
+                "slug": "business-65b",
+                "created_at": "2021-09-22 15:54:24"
+            },
+            "status": "todo",
+            "visibility": "public",
+            "created_at": "2021-09-24 16:45:21"
+        },
+        {
+            "title": "Go Shopping here",
+            "slug": "go-shopping-here-ydL",
+            "description": "Shopping",
+            "category": {
+                "id": 2,
+                "name": "Business",
+                "slug": "business-65b",
+                "created_at": "2021-09-22 15:54:24"
+            },
+            "status": "todo",
+            "visibility": "public",
+            "created_at": "2021-09-24 16:25:47"
+        },
+        {
+            "title": "Go Shopping",
+            "slug": "go-shopping-Luc",
+            "description": "Shopping",
+            "category": {
+                "id": 2,
+                "name": "Business",
+                "slug": "business-65b",
+                "created_at": "2021-09-22 15:54:24"
+            },
+            "status": "todo",
+            "visibility": "public",
+            "created_at": "2021-09-24 16:25:40"
+        },
+        {
+            "title": "Go Shopping",
+            "slug": "go-shopping-AkS",
+            "description": "Shopping",
+            "category": {
+                "id": 2,
+                "name": "Business",
+                "slug": "business-65b",
+                "created_at": "2021-09-22 15:54:24"
+            },
+            "status": "todo",
+            "visibility": "public",
+            "created_at": "2021-09-24 16:25:36"
+        },
+        {
+            "title": "Go Shopping",
+            "slug": "go-shopping-aTl",
+            "description": "Shopping",
+            "category": {
+                "id": 2,
+                "name": "Business",
+                "slug": "business-65b",
+                "created_at": "2021-09-22 15:54:24"
+            },
+            "status": "done",
+            "visibility": "public",
+            "created_at": "2021-09-22 16:12:34"
+        },
+        {
+            "title": "Go Shopping",
+            "slug": "go-shopping-HQe",
+            "description": "Shopping",
+            "category": {
+                "id": 2,
+                "name": "Business",
+                "slug": "business-65b",
+                "created_at": "2021-09-22 15:54:24"
+            },
+            "status": "todo",
+            "visibility": "public",
+            "created_at": "2021-09-22 16:11:26"
+        },
+        {
+            "title": "Go Shopping",
+            "slug": "go-shopping-aa0",
+            "description": "Shopping",
+            "category": {
+                "id": 2,
+                "name": "Business",
+                "slug": "business-65b",
+                "created_at": "2021-09-22 15:54:24"
+            },
+            "status": "todo",
+            "visibility": "public",
+            "created_at": "2021-09-22 16:10:14"
+        }
+    ],
+    "pagination": {
+        "count": 7,
+        "per_page": 8,
+        "current_page": 1,
+        "next_page": null,
+        "has_more_pages": false,
+        "next_page_url": null,
+        "previous_page_url": null
+    }
+}

@@ -1,8 +1,8 @@
 <template>
     <h5>Create New Task</h5>
-    <form action="#" class="row px-2 align-items-center" @submit.prevent="createTask">
+    <form id="task" action="#" class="row px-2 align-items-center" @submit.prevent="createTask">
         <div class="col-md-3 px-1 mt-2">
-            <input type="text" v-model="form.title" class="form-control add-task" placeholder="New Task...">
+            <input id="title" type="text" v-model="form.title" class="form-control add-task" placeholder="New Task...">
             <div v-if="validateErrors.title" class="invalid-feedback d-block">
                 {{ validateErrors.title[0] }}
             </div>

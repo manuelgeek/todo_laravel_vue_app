@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/16</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">77.77% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>7/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/16</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -100,38 +100,38 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -139,38 +139,38 @@
 import axios from 'axios';
 import NProgress from 'nprogress';
 &nbsp;
-<span class="cstat-no" title="statement not covered" >axios.interceptors.request.use(<span class="fstat-no" title="function not covered" >as</span>ync (config) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  NProgress.configure({ showSpinner: false });</span>
-<span class="cstat-no" title="statement not covered" >  NProgress.start();</span>
-<span class="cstat-no" title="statement not covered" >  config.withCredentials = true;</span>
-<span class="cstat-no" title="statement not covered" >  config.headers.common['X-Requested-With'] = 'XMLHttpRequest';</span>
-<span class="cstat-no" title="statement not covered" >  config.baseURL = '/api/v1';</span>
+axios.interceptors.request.use(async (config) =&gt; {
+  NProgress.configure({ showSpinner: false });
+  NProgress.start();
+  config.withCredentials = true;
+  config.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+  config.baseURL = '/api/v1';
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return config;</span>
+  return config;
 });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >axios.interceptors.response.use(<span class="fstat-no" title="function not covered" >(r</span>esponse) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  NProgress.done();</span>
-<span class="cstat-no" title="statement not covered" >  return response;</span>
+axios.interceptors.response.use((response) =&gt; {
+  NProgress.done();
+  return response;
 });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >axios.interceptors.response.use(null, <span class="fstat-no" title="function not covered" >as</span>ync (error) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  NProgress.done();</span>
-<span class="cstat-no" title="statement not covered" >  if (error.response) {</span>
+axios.interceptors.response.use(null, async (error) =&gt; {
+  NProgress.done();
+  <span class="missing-if-branch" title="else path not taken" >E</span>if (error.response) {
     /*
         * The request was made and the server responded with a
         * status code that falls out of the range of 2xx
         */
-<span class="cstat-no" title="statement not covered" >    if (error.response.status === 404) {</span>
+    if (error.response.status === 404) {
       // handle 404
     }
-<span class="cstat-no" title="statement not covered" >    if (error.response.status === 500 || error.response.status === 502 || error.response.status === 504) {</span>
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (error.response.status === 500 || error.response.status === 502 || error.response.status === 504) {
       // handle error 500
     }
   } else {
     // no internet/ request errors
   }
-<span class="cstat-no" title="statement not covered" >  return Promise.reject(error);</span>
+  return Promise.reject(error);
 });
 &nbsp;
 export default axios;
@@ -181,7 +181,7 @@ export default axios;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Sep 28 2021 13:35:07 GMT+0300 (East Africa Time)
+                at Tue Sep 28 2021 15:26:09 GMT+0300 (East Africa Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>
