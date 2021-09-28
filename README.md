@@ -4,7 +4,7 @@
 
 Laravel and Vue 3 TODO App
 
-## Set up
+### Set up
 
 `composer install`
 
@@ -16,10 +16,14 @@ Laravel and Vue 3 TODO App
 
 - Add database, Email, AWS, s3 configs to `.env`
 
-- Add the necessary env values; database, email, app name, app url etc
+- Add the necessary env values; database, email, app name, app url, SANCTUM_STATEFUL_DOMAINS(for stateful authentication) etc
 - To test for reset password, set email variables, alternatively, set `MAIL_HOST=log` for local email testing
     
 Create database tables and run seeder. The seeder sets up a user account.
+
+sample user account:
+Email: james@example.com
+Pass: password
 
 `php artisan migarate --seed`
 
@@ -47,12 +51,23 @@ DB_USERNAME=root
 DB_PASSWORD=password
 ```
 
+for SPA stateful authentication with sanctum
+
+```dotenv
+SANCTUM_STATEFUL_DOMAINS=localhost:8000
+```
+the port depends on the port you expose for the webserver
+
 ### Start docker
 `docker-compose up -d`
 
 rum migrations
 
 `docker-compose exec app php artisan migrate`
+
+seed data
+
+`docker-compose exec app php artisan db:seed`
 
 optional 
 
@@ -78,10 +93,11 @@ https://documenter.getpostman.com/view/3385291/UUxwBTm3
 
 ## What I would have done given more time
 - Forgot and reset password UIs, the APIs are already created
-- Edit category
-- Edit Task
+- Edit category, APIs were created
+- Edit Task, APIs were created
 - Handle task pagination - maybe use infinite scroll
-- Looked more 
+- Add cypress tests, had few errors adding cypress for vue 3 support with laravel mix
+- Increase code coverage for the APIs and the App
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

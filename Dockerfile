@@ -42,6 +42,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 
+RUN chown 1000 /var/www
+
 # Copy existing application directory contents
 COPY . /var/www
 
@@ -57,7 +59,8 @@ RUN php artisan key:generate --ansi
 
 RUN ls
 
-RUN npm install & npm run prod
+RUN npm install
+RUN npm run prod
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
