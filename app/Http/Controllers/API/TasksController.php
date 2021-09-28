@@ -55,7 +55,7 @@ class TasksController extends Controller
 
         Task::addAllToIndex();
 
-        return response()->json(['task' => fractal($task, new TaskTransformer())]);
+        return response()->json(['task' => fractal($task, new TaskTransformer())], 201);
     }
 
     public function update(TaskRequest $request, Task $task): \Illuminate\Http\JsonResponse
@@ -66,7 +66,7 @@ class TasksController extends Controller
 
         $task->update($data);
 
-        return response()->json(['task' => fractal($task, new TaskTransformer())]);
+        return response()->json(['task' => fractal($task, new TaskTransformer())], 201);
     }
 
     public function updateStatus(Request $request, Task $task): \Illuminate\Http\JsonResponse

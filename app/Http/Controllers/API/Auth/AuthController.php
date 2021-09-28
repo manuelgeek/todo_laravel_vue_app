@@ -30,6 +30,7 @@ class AuthController extends Controller
         Auth::login($user);
 
         return response()->json([
+            'message' => 'Registration Successful',
             'token' => $user->createToken(env('APP_NAME'))->plainTextToken,
             'user' => fractal($user, new UserTransformer())
         ]);
