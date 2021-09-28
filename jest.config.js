@@ -1,6 +1,12 @@
 module.exports = {
-  preset: '@vue/cli-plugin-unit-jest/presets/no-babel',
+  testRegex: 'resources/js/tests/.*.spec.js$',
+  moduleFileExtensions: ['js', 'json', 'vue'],
   transform: {
-    '^.+\\.vue$': 'vue-jest'
-  }
-}
+    // process `*.vue` files with `vue-jest`
+    '.*\\.(vue)$': '<rootDir>/node_modules/@vue/vue3-jest',
+    '^.+\\.js$': '<rootDir>/node_modules/babel-jest',
+  },
+  collectCoverage: true,
+  collectCoverageFrom: ['<rootDir>/resources/js/**/*.{js,vue}', '!**/node_modules/**'],
+  testEnvironment: 'jsdom',
+};
