@@ -91,7 +91,7 @@ https://www.getpostman.com/collections/8b7fb39d21cd94b2c310
 ## API Documentation
 https://documenter.getpostman.com/view/3385291/UUxwBTm3
 
-## What I would have done given more time
+## What I would have done extra - pending
 - Forgot and reset password UIs, the APIs are already created
 - Edit category, APIs were created
 - Edit Task, APIs were created
